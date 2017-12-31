@@ -22,6 +22,7 @@ import javax.swing.DefaultComboBoxModel;
 public class TravelPanel extends JPanel {
 	private JTextField txtDeparture;
 	private JTextField txtArrival;
+	private JComboBox<Object> cboType;
 
 	/**
 	 * Constructor
@@ -50,8 +51,8 @@ public class TravelPanel extends JPanel {
 		lblArrival.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		//Create the combo box and fill it's options
-		JComboBox<Object> cboType = new JComboBox<Object>();
-		cboType.setModel(new DefaultComboBoxModel<Object>(new String[] {"Bus", "Walk", "Car", "Plane", "Other"}));
+		cboType = new JComboBox();
+		cboType.setModel(new DefaultComboBoxModel(new String[] {"Bus", "Walk", "Car", "Plane", "Other"}));
 		
 		//Create the text fields
 		txtDeparture = new JTextField();
@@ -112,5 +113,31 @@ public class TravelPanel extends JPanel {
 					.addContainerGap(12, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
+	}
+	
+	/**
+	 * gets the combo box selection
+	 * @return travelType
+	 */
+	public String getTravelType() { 
+		String travelType = (String) cboType.getSelectedItem();
+		return travelType;
+	}
+	/**
+	 * gets the text from the departure text box
+	 * @return departure
+	 */
+	public String getTravelDeparture() { 
+		String departure = txtDeparture.getText();
+		return departure;
+	}
+	
+	/**
+	 * gets the text from the arrival text box
+	 * @return arrival
+	 */
+	public String getTravelArival() { 
+		String arrival = txtArrival.getText();
+		return arrival;
 	}
 }

@@ -1,9 +1,16 @@
+/**
+ * 
+ */
 package Models;
 
+/**
+ * 
+ * @author Ella Love
+ *
+ */
 public class Group {
 
 	private String groupName;
-
 	private int groupId;
 
 	// Getters and Setters
@@ -26,6 +33,4 @@ public class Group {
 	public void setGroupId(int groupId) {
 		this.groupId = groupId;
 	}
-
-
 }

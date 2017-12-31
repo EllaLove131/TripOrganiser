@@ -60,4 +60,13 @@ public class VenuePanel extends JPanel {
 		);
 		setLayout(groupLayout);		
 	}
+	
+	/**
+	 * Gets the content of the venue text box
+	 * @return venue
+	 */
+	public String getVenue(){ 
+		String venue = txtVenue.getText(); 
+		return venue;
+	}
 }

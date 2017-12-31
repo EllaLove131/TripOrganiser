@@ -322,8 +322,7 @@ public class TripsTabPanel extends JPanel {
 		//For when the add trip button is clicked
 		btnAddTrip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TripTypeDialog tripTypeDialog = new TripTypeDialog();
-				tripTypeDialog.setModal(true);
+				AddTripDialog tripTypeDialog = new AddTripDialog();
 				tripTypeDialog.setVisible(true);
 			}
 		});

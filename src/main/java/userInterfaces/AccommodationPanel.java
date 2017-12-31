@@ -102,4 +102,32 @@ public class AccommodationPanel extends JPanel {
 						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		setLayout(groupLayout);
 	}
+	
+	/**
+	 * gets the content of the accommodation text field
+	 * @return accommodation 
+	 */
+	public String getAccommodation() { 
+		String accommodation = txtLocation.getText();
+		return accommodation;
+	}
+	
+	/**
+	 * gets the content of the accommodation arrival text field
+	 * @return accommodationArrival
+	 */
+	public String getAccommodationArrival() { 
+		String accommodationArrival = txtArrival.getText();
+		return accommodationArrival;
+	}
+	
+	/**
+	 * gets the content of the accommodation departure text field
+	 * @return accommodationDeparture
+	 */
+	public String getAccommodationDeparture() { 
+		String accommodationDeparture = txtDeparture.getText();
+		return accommodationDeparture;
+	}
+	
 }

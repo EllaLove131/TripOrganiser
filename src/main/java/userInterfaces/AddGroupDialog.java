@@ -140,6 +140,7 @@ public class AddGroupDialog extends JDialog {
 				// Get the name from the text box
 				String groupName = txtName.getText();
 
+				//Error message to be populated if there is a verification issue 
 				String errorMessage = "";
 
 				// Create a new group
