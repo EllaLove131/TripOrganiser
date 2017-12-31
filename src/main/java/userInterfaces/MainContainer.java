@@ -1,34 +1,26 @@
+/**
+ * 
+ */
 package userInterfaces;
 
-import java.awt.EventQueue;
 import java.awt.Toolkit;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * 
+ * @author Ella Love
+ *
+ */
+@SuppressWarnings("serial")
 public class MainContainer extends JFrame {
 	static JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			
-			public void run() {
-				try {
-					MainContainer frame = new MainContainer();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Constructor.
@@ -42,6 +34,9 @@ public class MainContainer extends JFrame {
 	 * Initialise components.
 	 */
 	public void initComponents(){ 
+		
+		//Ensures that the dialog is disposed of when closed
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		
 		// Title bar
 		setTitle("Trip Organiser");

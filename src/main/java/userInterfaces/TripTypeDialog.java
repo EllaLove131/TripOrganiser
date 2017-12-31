@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package userInterfaces;
 
 import java.awt.Font;
@@ -18,6 +21,12 @@ import javax.swing.JRadioButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * 
+ * @author Ella Love
+ *
+ */
+@SuppressWarnings("serial")
 public class TripTypeDialog extends JDialog {
 
 	// Interface variables
@@ -47,8 +56,11 @@ public class TripTypeDialog extends JDialog {
 	 */
 	public void initComponents() {
 
-//		setModalityType(ModalityType.APPLICATION_MODAL);
+		//Ensures that the dialog is disposed of when closed
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		
+		//Displays the dialog in front of any others
+		setModalityType(ModalityType.APPLICATION_MODAL);
 		
 		//title bar
 		setTitle("New Trip");

@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package userInterfaces;
 
 import javax.swing.JPanel;
@@ -8,6 +11,11 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+/**
+ * @author Ella Love
+ *
+ */
+@SuppressWarnings("serial")
 public class AllFeesPanel extends JPanel {
 	private JTextField txtEntranceFees;
 	private JTextField txtSundryFees;

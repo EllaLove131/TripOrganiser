@@ -22,8 +22,8 @@ public class DatabaseConnectionPoolHandler {
 		dataSource = new ComboPooledDataSource();          
 		
 		dataSource.setJdbcUrl( "jdbc:mysql://programming2.clql2aelajju.us-east-2.rds.amazonaws.com/TripOrganiser" );
-		dataSource.setUser("ella");                                  
-		dataSource.setPassword("ekvS!61^fh%llfkD");                                  
+		dataSource.setUser("tripOrganiser");                                  
+		dataSource.setPassword("spocktallbatterywelly123");                                  
 	}
 	
 	public static DatabaseConnectionPoolHandler getInstance()

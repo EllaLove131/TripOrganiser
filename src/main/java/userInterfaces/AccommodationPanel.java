@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package userInterfaces;
 
 import java.awt.Font;
@@ -9,6 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+/**
+ * @author Ella Love
+ *
+ */
+@SuppressWarnings("serial")
 public class AccommodationPanel extends JPanel {
 	private JTextField txtLocation;
 	private JTextField txtArrival;
@@ -26,8 +34,8 @@ public class AccommodationPanel extends JPanel {
 	 * Create the panel.
 	 */
 	private void initComponents() {
-		
-		//Create the labels
+
+		// Create the labels
 		JLabel lblAccommodation = new JLabel("Accommodation");
 		lblAccommodation.setFont(new Font("Tahoma", Font.BOLD, 11));
 
@@ -40,7 +48,7 @@ public class AccommodationPanel extends JPanel {
 		JLabel lblDeparture = new JLabel("Departure:");
 		lblDeparture.setFont(new Font("Tahoma", Font.BOLD, 11));
 
-		//Create the text boxes
+		// Create the text boxes
 		txtLocation = new JTextField();
 		txtLocation.setColumns(10);
 
@@ -49,8 +57,8 @@ public class AccommodationPanel extends JPanel {
 
 		txtDeparture = new JTextField();
 		txtDeparture.setColumns(10);
-		
-		//Apply a group layout
+
+		// Apply a group layout
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout
 				.setHorizontalGroup(

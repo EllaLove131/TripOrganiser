@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package userInterfaces;
 
 import java.awt.Font;
@@ -17,6 +20,12 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
+/**
+ * 
+ * @author Ella Love
+ *
+ */
+@SuppressWarnings("serial")
 public class TripsTabPanel extends JPanel {
 
 	private JLabel lblTripStartDateFromDb;

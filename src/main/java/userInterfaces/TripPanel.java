@@ -1,15 +1,23 @@
+/**
+ * 
+ */
 package userInterfaces;
 
-import javax.swing.JPanel;
+import java.awt.Font;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import java.awt.GridLayout;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.FlowLayout;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+/**
+ * 
+ * @author Ella Love
+ *
+ */
+@SuppressWarnings("serial")
 public class TripPanel extends JPanel {
 	private JTextField txtName;
 	private JTextField txtEnd;

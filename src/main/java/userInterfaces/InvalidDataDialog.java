@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package userInterfaces;
 
 import java.awt.BorderLayout;
@@ -12,6 +15,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
+/**
+ * @author Ella Love
+ *
+ */
+@SuppressWarnings("serial")
 public class InvalidDataDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();

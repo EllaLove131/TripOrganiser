@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package userInterfaces;
 
 import javax.swing.JPanel;
@@ -10,6 +13,12 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.DefaultComboBoxModel;
 
+/**
+ * 
+ * @author Ella Love
+ *
+ */
+@SuppressWarnings("serial")
 public class TravelPanel extends JPanel {
 	private JTextField txtDeparture;
 	private JTextField txtArrival;
@@ -41,8 +50,8 @@ public class TravelPanel extends JPanel {
 		lblArrival.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		//Create the combo box and fill it's options
-		JComboBox cboType = new JComboBox();
-		cboType.setModel(new DefaultComboBoxModel(new String[] {"Bus", "Walk", "Car", "Plane", "Other"}));
+		JComboBox<Object> cboType = new JComboBox<Object>();
+		cboType.setModel(new DefaultComboBoxModel<Object>(new String[] {"Bus", "Walk", "Car", "Plane", "Other"}));
 		
 		//Create the text fields
 		txtDeparture = new JTextField();

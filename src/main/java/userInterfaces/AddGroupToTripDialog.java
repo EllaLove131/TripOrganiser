@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package userInterfaces;
 
 import java.awt.FlowLayout;
@@ -19,6 +22,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
+/**
+ * @author Ella Love
+ *
+ */
+@SuppressWarnings("serial")
 public class AddGroupToTripDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -26,19 +34,6 @@ public class AddGroupToTripDialog extends JDialog {
 	private JTable studentsTable;
 	private JButton btnOk;
 	private JButton btnCancel;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			AddGroupToTripDialog dialog = new AddGroupToTripDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Constructor
@@ -53,6 +48,12 @@ public class AddGroupToTripDialog extends JDialog {
 	 * Creates the dialog
 	 */
 	public void initComponents(){ 
+		
+		//Ensures that the dialog is disposed of when closed
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		
+		//Displays the dialog in front of any others
+		setModalityType(ModalityType.APPLICATION_MODAL);
 		
 		//The window title and image
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AddGroupToTripDialog.class.getResource("/resources/add.png")));

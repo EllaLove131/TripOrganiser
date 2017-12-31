@@ -1,9 +1,11 @@
+/**
+ * 
+ */
 package userInterfaces;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,14 +15,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
-import triporganiser.triporganiser.Student;
-import triporganiser.triporganiser.StudentQueries;
+import Models.Student;
+import Queries.StudentQueries;
 
+/**
+ * @author Ella Love
+ *
+ */
+@SuppressWarnings("serial")
 public class AddStudentDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -32,20 +40,7 @@ public class AddStudentDialog extends JDialog {
 	private JTextField txtMobileNo;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			AddStudentDialog dialog = new AddStudentDialog();
-			
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
+	 * Constructor.
 	 */
 	public AddStudentDialog() {
 
@@ -54,12 +49,12 @@ public class AddStudentDialog extends JDialog {
 	}
 
 	private void initComponents() {
-		//Ensures that the dialog is disposed of when closed
+		// Ensures that the dialog is disposed of when closed
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		
-		//Displays the dialog in front of any others
+
+		// Displays the dialog in front of any others
 		setModalityType(ModalityType.APPLICATION_MODAL);
-		
+
 		// Window image and title
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AddStudentDialog.class.getResource("/resources/add.png")));
 		setTitle("New Student");
@@ -162,16 +157,20 @@ public class AddStudentDialog extends JDialog {
 			}
 		});
 
-		// OK button is clicked, add the student to the db and clear fields
+		// OK button is clicked
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				// Get the text from the text boxes
 				String firstName = txtFirstName.getText();
 				String lastName = txtLastName.getText();
 				String mobileNo = txtMobileNo.getText();
 
 				String errorMessage = "";
 
+				// Create a new student
 				Student newStudent = new Student();
+
+				// Verify the data
 				if (!newStudent.setFirstName(firstName)) {
 					errorMessage = "First Name field is empty";
 				}
@@ -184,9 +183,31 @@ public class AddStudentDialog extends JDialog {
 					errorMessage = "Mobile Number field is invalid";
 				}
 
+				// If there is no validation issue
 				if (errorMessage.isEmpty()) {
-					new StudentQueries().addStudent(newStudent);
+
+					//Get the groupId 
+					int groupId = GroupsTabPanel.getGroupId();
+					
+					// Add the student to the db
+					StudentQueries studentQueries = new StudentQueries();
+					studentQueries.addStudent(newStudent);
+					studentQueries.addStudentToGroup(newStudent, groupId);
+
+					// Empty the content of the text fields
+					txtFirstName.setText("");
+					txtLastName.setText("");
+					txtMobileNo.setText("");
+
+					// Update the students table with the new changes
+					GroupsTabPanel.updateStudentTable();
+
+					// Show a dialog to the user, verifying that the action was
+					// successful
+					JOptionPane.showMessageDialog(null, "Student added succesfully.");
+
 				} else {
+					// Show the invalid data dialog
 					InvalidDataDialog invalidDialog = new InvalidDataDialog();
 					invalidDialog.lblInfoText.setText(errorMessage);
 					invalidDialog.setVisible(true);

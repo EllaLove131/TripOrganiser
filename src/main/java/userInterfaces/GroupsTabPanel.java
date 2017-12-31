@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package userInterfaces;
 
 import java.awt.event.ActionEvent;
@@ -11,25 +14,37 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTree;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-import triporganiser.triporganiser.Student;
-import triporganiser.triporganiser.StudentQueries;
-import triporganiser.triporganiser.StudentTableModel;
+import Models.Group;
+import Models.Student;
+import Queries.GroupQueries;
+import Queries.StudentQueries;
+import TableModels.GroupTableModel;
+import TableModels.StudentTableModel;
 
+import javax.swing.JLabel;
+
+/**
+ * @author Ella Love
+ *
+ */
+@SuppressWarnings("serial")
 public class GroupsTabPanel extends JPanel {
-	private JTable tblStudents;
+	private static JTable tblStudents;
 	private JButton btnAddGroup;
 	private JButton btnAddStudent;
+	private JButton btnRemoveStudent;
+	private JButton btnRemoveGroup;
+	private static JTable tblGroups;
 
 	/**
 	 * Constructor
 	 */
 	public GroupsTabPanel() {
-		
+
 		initComponents();
 		eventHandler();
 	}
@@ -38,47 +53,73 @@ public class GroupsTabPanel extends JPanel {
 	 * Creates interface
 	 */
 	private void initComponents() {
+
+		//Create selected students label
+		JLabel lblSelectedStudents = new JLabel("Students within the selected group:");
 		
-		//Scroll pane for group tree
-		JScrollPane spGroupTree = new JScrollPane();
-		
-		//Add group button, with image
+		// Add group button, with image
 		btnAddGroup = new JButton("");
 		btnAddGroup.setIcon(new ImageIcon(GroupsTabPanel.class.getResource("/resources/add.png")));
-		
-		//Remove group button, with image
-		JButton btnRemoveGroup = new JButton("");
+
+		// Remove group button, with image
+		btnRemoveGroup = new JButton("");
+		btnRemoveGroup.setEnabled(false);
 		btnRemoveGroup.setIcon(new ImageIcon(GroupsTabPanel.class.getResource("/resources/remove.png")));
-		
-		//Table
-		//Query the db to get the info to fill the rows
-		StudentQueries studentqueries = new StudentQueries();
-		ArrayList<Student> students = studentqueries.getStudents();
-		//Create the table model for students
-		StudentTableModel tableModel = new StudentTableModel(students);
-		//Create the table
-		tblStudents = new JTable(tableModel);
-		
-		//Add student button, with image
+
+		// Group Table
+		// Query the db to get the data to fill the rows and add it to an array
+		// list
+		GroupQueries groupQueries = new GroupQueries();
+		ArrayList<Group> groups = groupQueries.getGroups();
+		// Create the table model for groups
+		GroupTableModel groupTableModel = new GroupTableModel(groups);
+		// Create the table using the table model
+		tblGroups = new JTable(groupTableModel);
+
+		Integer groupId = getGroupId();
+
+		// Student Table
+		// Query the db to get the data to fill the rows and add it to an array
+		// list
+		ArrayList<Student> students = new ArrayList<Student>();
+
+		// If there are any groups
+		if (groupId != null) {
+			students = groupQueries.getStudentsFromGroup(groupId.intValue());
+		}
+		// Create the table model for students
+		StudentTableModel studentTableModel = new StudentTableModel(students);
+		// Create the table using the table model
+		tblStudents = new JTable(studentTableModel);
+
+		// Add student button, with image
 		btnAddStudent = new JButton("");
+		btnAddStudent.setEnabled(false);
 		btnAddStudent.setIcon(new ImageIcon(GroupsTabPanel.class.getResource("/resources/add.png")));
-		
-		//Remove student button, with image
-		JButton btnRemoveStudent = new JButton("");
+
+		// Remove student button, with image
+		btnRemoveStudent = new JButton("");
+		btnRemoveStudent.setEnabled(false);
 		btnRemoveStudent.setIcon(new ImageIcon(GroupsTabPanel.class.getResource("/resources/remove.png")));
-		
-		//Create the scroll pane and add the students 
+
+		// Create the scroll pane for group table
+		JScrollPane spGroup = new JScrollPane();
+		// Add the group table to the scroll panel
+		spGroup.setViewportView(tblGroups);
+
+		// Create the scroll pane for the student table
 		JScrollPane spStudents = new JScrollPane();
-		spStudents.add(tblStudents);
-		
-		//Layout
+		// Add the student table to the scroll panel
+		spStudents.setViewportView(tblStudents);
+
+		// Layout
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(spGroupTree, GroupLayout.PREFERRED_SIZE, 264, GroupLayout.PREFERRED_SIZE)
+						.addComponent(spGroup, GroupLayout.PREFERRED_SIZE, 264, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(btnAddGroup)
 							.addPreferredGap(ComponentPlacement.RELATED)
@@ -89,20 +130,20 @@ public class GroupsTabPanel extends JPanel {
 							.addComponent(btnAddStudent)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnRemoveStudent))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(spStudents, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(tblStudents, GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)))
+						.addComponent(lblSelectedStudents)
+						.addComponent(spStudents, GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(tblStudents, GroupLayout.PREFERRED_SIZE, 344, GroupLayout.PREFERRED_SIZE)
-						.addComponent(spGroupTree, GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
-						.addComponent(spStudents, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(spGroup, GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblSelectedStudents)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(spStudents, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
@@ -112,58 +153,129 @@ public class GroupsTabPanel extends JPanel {
 						.addComponent(btnRemoveStudent))
 					.addContainerGap())
 		);
-		
-		//Create the groups tree
-		JTree treeGroups = new JTree();
-		treeGroups.setModel(new DefaultTreeModel(
-			new DefaultMutableTreeNode("Current Groups") {
-				{
-					DefaultMutableTreeNode node_1;
-					node_1 = new DefaultMutableTreeNode("Science");
-						node_1.add(new DefaultMutableTreeNode("Ella Love"));
-					add(node_1);
-					node_1 = new DefaultMutableTreeNode("Maths ");
-						node_1.add(new DefaultMutableTreeNode("Ella Love"));
-					add(node_1);
-					node_1 = new DefaultMutableTreeNode("English");
-						node_1.add(new DefaultMutableTreeNode("Ella Love"));
-					add(node_1);
-					node_1 = new DefaultMutableTreeNode("Music");
-						node_1.add(new DefaultMutableTreeNode("Ella Love"));
-					add(node_1);
-					node_1 = new DefaultMutableTreeNode("Orchestra ");
-						node_1.add(new DefaultMutableTreeNode("Ella Love"));
-					add(node_1);
-				}
-			}
-		));
-		spGroupTree.setViewportView(treeGroups);
+
 		setLayout(groupLayout);
 	}
-	
+
 	/**
 	 * Handles events
 	 */
 	private void eventHandler() {
-		
-		//Add group button clicked
+
+		// Add group button clicked
 		btnAddGroup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		
-				AddGroupDialog addGroupDialog = new AddGroupDialog(); 
-				addGroupDialog.setModal(true); 
+
+				// Create and show the add group dialog
+				AddGroupDialog addGroupDialog = new AddGroupDialog();
 				addGroupDialog.setVisible(true);
 			}
 		});
-		
-		//Add student button clicked 
+
+		// Remove group button clicked
+		btnRemoveGroup.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				// Get Group id from the selected row
+				int selectedRow = tblGroups.getSelectedRow();
+				int groupId = (Integer) tblGroups.getModel().getValueAt(selectedRow, GroupTableModel.GROUP_ID_COLUMN);
+
+				// Delete the group with that id
+				GroupQueries groupQueries = new GroupQueries();
+				groupQueries.removeGroup(groupId);
+
+				// Update the table
+				updateGroupTable();
+			}
+		});
+
+		// Add student button clicked
 		btnAddStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
+				// Create and show the add student dialog
 				AddStudentDialog addStudentDialog = new AddStudentDialog();
-				addStudentDialog.setModal(true);
 				addStudentDialog.setVisible(true);
 			}
 		});
+
+		// Remove student button clicked
+		btnRemoveStudent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				// Get Student id from the selected row
+				int selectedRow = tblStudents.getSelectedRow();
+				int studentId = (Integer) tblStudents.getModel().getValueAt(selectedRow,
+						StudentTableModel.STUDENT_ID_COLUMN);
+
+				// Delete the student with that id
+				StudentQueries studentQueries = new StudentQueries();
+				studentQueries.removeStudent(studentId);
+
+				// Update the table
+				updateStudentTable();
+			}
+		});
+
+		// When a selection is made in the groups table
+		tblGroups.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				// update the student table
+				updateStudentTable();
+				// set the following buttons to enabled:
+				btnAddStudent.setEnabled(true);
+				btnRemoveGroup.setEnabled(true);
+			}
+		});
+
+		// When a selection is made in the students table
+		tblStudents.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				// enable the remove student button if a group is selected
+				if (btnRemoveGroup.isEnabled()) {
+					btnRemoveStudent.setEnabled(true);
+				}
+			}
+		});
+	}
+
+	/**
+	 * Updates the table of students
+	 */
+	public static void updateStudentTable() {
+		GroupQueries groupQueries = new GroupQueries();
+		int groupId = getGroupId();
+		ArrayList<Student> students = groupQueries.getStudentsFromGroup(groupId);
+		StudentTableModel studentTableModel = new StudentTableModel(students);
+		tblStudents.setModel(studentTableModel);
+	}
+
+	/**
+	 * Updates the groups table
+	 */
+	public static void updateGroupTable() {
+		GroupQueries groupQueries = new GroupQueries();
+		ArrayList<Group> groups = groupQueries.getGroups();
+		GroupTableModel groupTableModel = new GroupTableModel(groups);
+		tblGroups.setModel(groupTableModel);
+	}
+
+	/**
+	 * Get the id of the selected group
+	 * 
+	 * @return groupId
+	 */
+	public static Integer getGroupId() {
+		// Get Group id from the selected row
+		int selectedRow = tblGroups.getSelectedRow();
+
+		// Check for no row selected.
+		if (selectedRow == -1) {
+			selectedRow = 0;
+		}
+
+		Integer groupId = (Integer) tblGroups.getModel().getValueAt(selectedRow, GroupTableModel.GROUP_ID_COLUMN);
+
+		return groupId;
 	}
 }
