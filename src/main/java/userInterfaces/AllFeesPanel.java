@@ -91,8 +91,8 @@ public class AllFeesPanel extends JPanel {
 	 * gets the text from the entrance fee text field
 	 * @return entranceFee
 	 */
-	public Double getEntranceFee() {
-		Double entranceFee = Double.parseDouble(txtEntranceFees.getText());
+	public Double getEntranceFee() throws NumberFormatException { 
+		Double entranceFee = Double.valueOf(txtEntranceFees.getText());
 		return entranceFee;
 	}
 	
@@ -100,8 +100,8 @@ public class AllFeesPanel extends JPanel {
 	 * gets the text from the sundryFee field
 	 * @return sundryFee
 	 */
-	public Double getSundryFee() { 
-		double sundryFee = Double.parseDouble(txtSundryFees.getText()); 
+	public Double getSundryFee() throws NumberFormatException { 
+		Double sundryFee = Double.valueOf(txtSundryFees.getText()); 
 		return sundryFee; 
 	}
 }

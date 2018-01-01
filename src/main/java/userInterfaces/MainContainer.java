@@ -44,7 +44,7 @@ public class MainContainer extends JFrame {
 		
 		//JFrame 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 949, 488);
+		setBounds(100, 100, 949, 557);
 		
 		//Create a tabbed pane 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -75,12 +75,5 @@ public class MainContainer extends JFrame {
 		tabbedPane.addTab("Trips", null, trips, null);
 		tabbedPane.addTab("Groups", null, groups, null);
 		tabbedPane.addTab("Help", null, help, null);
-	}
-	
-	/**
-	 * Button events.
-	 */
-	public void createEvents(){
-		
 	}
 }

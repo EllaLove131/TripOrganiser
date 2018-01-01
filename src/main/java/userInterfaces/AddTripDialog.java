@@ -22,7 +22,6 @@ import javax.swing.JRadioButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
-import Models.Group;
 import Models.Trip;
 import Queries.TripQueries;
 
@@ -198,6 +197,8 @@ public class AddTripDialog extends JDialog {
 		tripInputPanel.add(travelPanel);
 		tripInputPanel.add(allFeesPanel);
 		tripInputPanel.add(venuePanel);
+		//Set the default trip type 
+		tripType = "DayTeacher";
 
 		// Make everything fit into the JDialog
 		pack();
@@ -289,6 +290,14 @@ public class AddTripDialog extends JDialog {
 		// Add button is clicked
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
+				// Create a new trip
+				Trip newTrip = new Trip();
+
+				// Error message to be populated if there is a verification
+				// issue
+				String errorMessage = "";
+
 				// Add the trip to the db...
 				// Get the values from each text box
 				String tripName = tripPanel.getTripName();
@@ -298,33 +307,10 @@ public class AddTripDialog extends JDialog {
 				String travelDeparture = travelPanel.getTravelDeparture();
 				String travelArrival = travelPanel.getTravelArival();
 
-				// Get the values depending on the panels being show, i.e. the
-				// trip type
-				if (tripType == "ResidentialTeacher") {
-					Double entranceFee = allFeesPanel.getEntranceFee();
-					Double sundryFee = allFeesPanel.getSundryFee();
-					String venue = venuePanel.getVenue();
-					String accommodation = accommodationPanel.getAccommodation();
-					String accommodationArrival = accommodationPanel.getAccommodationArrival();
-					String accommodationDeparture = accommodationPanel.getAccommodationDeparture();
-
-				} else if (tripType == "DayTeacher") {
-					Double entranceFee = allFeesPanel.getEntranceFee();
-					Double sundryFee = allFeesPanel.getSundryFee();
-					String venue = venuePanel.getVenue();
-
-				} else if (tripType == "ResidentialExternal" || tripType == "DayExternal") {
-					Double entranceFee = entranceFeePanel.getEntranceFee();
-				}
-
-				// Error message to be populated if there is a verification
-				// issue
-				String errorMessage = "";
-
-				// Create a new group
-				Trip newTrip = new Trip();
-
-				// Verify the data
+				// Verify this data
+				newTrip.setTransportType(travelType);
+				newTrip.setTripType(tripType);
+				
 				if (!newTrip.setTripName(tripName)) {
 					errorMessage = "Name field is empty";
 				}
@@ -337,22 +323,154 @@ public class AddTripDialog extends JDialog {
 					errorMessage = "End date field is empty";
 				}
 
-				if (!newTrip.setTransportType(transportType)) {
-
+				if (!newTrip.setTransportDeparture(travelDeparture)) {
+					errorMessage = "Transport departure time is empty";
 				}
 
+				if (!newTrip.setTransportArrival(travelArrival)) {
+					errorMessage = "Transport arrival time is empty";
+				}
+
+				// Get the values depending on the panels being show, i.e. the
+				// trip type and then verify that data
+				if (tripType.equals("ResidentialTeacher")) {
+					String venue = venuePanel.getVenue();
+					String accommodation = accommodationPanel.getAccommodation();
+					String accommodationArrival = accommodationPanel.getAccommodationArrival();
+					String accommodationDeparture = accommodationPanel.getAccommodationDeparture();
+
+					newTrip.setApprovalRequired(true);
+					
+					try
+					{
+						Double sundryFee = allFeesPanel.getSundryFee();
+												
+						if (!newTrip.setEntranceFee(sundryFee)) {
+							errorMessage = "Sundry fee is empty";
+						}
+					}
+					catch (NumberFormatException e)
+					{
+						errorMessage = "Sundry fee needs to be a number";
+					}
+					
+					try
+					{
+						Double entranceFee = allFeesPanel.getEntranceFee();
+												
+						if (!newTrip.setEntranceFee(entranceFee)) {
+							errorMessage = "Entrance fee is empty";
+						}
+					}
+					catch (NumberFormatException e)
+					{
+						errorMessage = "Entrance fee needs to be a number";
+					}
+
+					if (!newTrip.setVenue(venue)) {
+						errorMessage = "Venue is empty";
+					}
+					
+					if(!newTrip.setAccommodation(accommodation)){
+						errorMessage = "Accommodation is empty";
+					}
+					
+					if(!newTrip.setAccommodationArrival(accommodationArrival)){
+						errorMessage = "Accommodation arrival is empty";
+					}
+					
+					if(!newTrip.setAccommodationDeparture(accommodationDeparture)){
+						errorMessage = "Accommodation departure is empty";
+					}
+
+				} else if (tripType.equals("DayTeacher")) {
+
+					newTrip.setApprovalRequired(false);
+					String venue = venuePanel.getVenue();
+
+					try
+					{
+						Double sundryFee = allFeesPanel.getSundryFee();
+												
+						if (!newTrip.setEntranceFee(sundryFee)) {
+							errorMessage = "Sundry fee is empty";
+						}
+					}
+					catch (NumberFormatException e)
+					{
+						errorMessage = "Sundry fee needs to be a number";
+					}
+					
+					try
+					{
+						Double entranceFee = allFeesPanel.getEntranceFee();
+						
+						if (!newTrip.setEntranceFee(entranceFee)) {
+							errorMessage = "Entrance fee is empty";
+						}
+					}
+					catch (NumberFormatException e)
+					{
+						errorMessage = "Entrance fee needs to be a number";
+					}
+					
+					if (!newTrip.setVenue(venue)) {
+						errorMessage = "Venue is empty";
+					}
+
+				} else if (tripType.equals("ResidentialExternal")) {
+					try
+					{
+						Double entranceFee = entranceFeePanel.getEntranceFee();
+												
+						if (!newTrip.setEntranceFee(entranceFee)) {
+							errorMessage = "Entrance fee is empty";
+						}
+					}
+					catch (NumberFormatException e)
+					{
+						errorMessage = "Entrance fee needs to be a number";
+					}
+					
+					newTrip.setApprovalRequired(true);
+
+				} else if (tripType.equals("DayExternal")) {
+					
+					try
+					{
+						Double entranceFee = entranceFeePanel.getEntranceFee();
+												
+						if (!newTrip.setEntranceFee(entranceFee)) {
+							errorMessage = "Entrance fee is empty";
+						}
+					}
+					catch (NumberFormatException e)
+					{
+						errorMessage = "Entrance fee needs to be a number";
+					}
+
+					newTrip.setApprovalRequired(false);
+
+				}
+				
 				// If the data is verified
 				if (errorMessage.isEmpty()) {
 					// Add the trip to the db
 					new TripQueries().addTrip(newTrip);
 					// Update the display
-
+					TripsTabPanel.updateTripTable();
+					
 					// Show a verification dialog
 					JOptionPane.showMessageDialog(null, "Trip added succesfully.");
 
 					// close the view
 					dispose();
-				}
+				} else {
+				// Show the invalid data dialog
+				InvalidDataDialog invalidDialog = new InvalidDataDialog();
+				invalidDialog.lblInfoText.setText(errorMessage);
+				invalidDialog.setVisible(true);
+			}
 			}
 		});
 	}

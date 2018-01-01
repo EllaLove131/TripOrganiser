@@ -74,8 +74,8 @@ public class EntranceFeesPanel extends JPanel {
 	 * Gets the entrance fee from the text box
 	 * @return entranceFee
 	 */
-	public Double getEntranceFee() { 
-		Double entranceFee = Double.parseDouble(txtEntranceFees.getText());
+	public Double getEntranceFee() throws NumberFormatException { 
+		Double entranceFee = Double.valueOf(txtEntranceFees.getText());
 		return entranceFee;
 	}
 }

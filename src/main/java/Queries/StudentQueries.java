@@ -4,13 +4,11 @@
 package Queries;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import org.apache.commons.dbutils.QueryRunner;
 
 import Models.Student;
 import ResultSetHandlers.AutoGenKeyResultSetHandler;
-import ResultSetHandlers.StudentResultSetHandler;
 import triporganiser.triporganiser.DatabaseConnectionPoolHandler;
 
 /**
@@ -79,29 +77,22 @@ public class StudentQueries {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * Remove a student from a group
-	 */
-	public void removeStudentFromGroup(int studentId, int groupId) {
-		// TODO complete
-	}
-
-	/**
-	 * Get all students
-	 * 
-	 * @return and arraylist of students
-	 */
-	public ArrayList<Student> getAllStudents() {
-
-		ArrayList<Student> results = new ArrayList<Student>();
-
-		try {
-			results = queryRunner.query("SELECT * FROM Student", new StudentResultSetHandler());
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return results;
-	}
+//
+//	/**
+//	 * Get all students
+//	 * 
+//	 * @return and arraylist of students
+//	 */
+//	public ArrayList<Student> getAllStudents() {
+//
+//		ArrayList<Student> results = new ArrayList<Student>();
+//
+//		try {
+//			results = queryRunner.query("SELECT * FROM Student", new StudentResultSetHandler());
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return results;
+//	}
 }

@@ -80,6 +80,7 @@ public class Trip {
 		if (entranceFee == null) {
 			return false;
 		}
+		
 		this.entranceFee = entranceFee;
 		return true;
 	}
@@ -192,11 +193,7 @@ public class Trip {
 		return tripType;
 	}
 
-	public boolean setTripType(String tripType) {
-		if(tripType.isEmpty()){
-			return false; 
-		}
+	public void setTripType(String tripType) {
 		this.tripType = tripType;
-		return false; 
 	}
 }

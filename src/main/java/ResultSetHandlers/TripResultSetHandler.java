@@ -19,7 +19,7 @@ public class TripResultSetHandler implements ResultSetHandler<ArrayList<Trip>> {
 
 			trip.setTripType(rs.getString("tripType"));
 			trip.setTripId(rs.getInt("tripId"));
-			trip.setTripName(rs.getString("studentId"));
+			trip.setTripName(rs.getString("tripName"));
 			trip.setStartDate(rs.getString("startDate"));
 			trip.setEndDate(rs.getString("endDate"));
 			trip.setEntranceFee(rs.getDouble("entranceFee"));
@@ -28,12 +28,19 @@ public class TripResultSetHandler implements ResultSetHandler<ArrayList<Trip>> {
 			trip.setTransportArrival(rs.getString("transportArrival"));
 			trip.setApprovalRequired(rs.getBoolean("approvalRequired"));
 
-			trip.setSundryFee(rs.getDouble("sundryFee"));
-			trip.setVenue(rs.getString("venue"));
-			trip.setAccommodation(rs.getString("accommodation"));
-			trip.setAccommodationArrival(rs.getString("accommodationArrival"));
-			trip.setAccommodationDeparture(rs.getString("accommodationDeparture"));
+			String tripType = trip.getTripType();
 			
+			if (tripType.equals("ResidentialTeacher")) {
+				trip.setSundryFee(rs.getDouble("sundryFee"));
+				trip.setVenue(rs.getString("venue"));
+				trip.setAccommodation(rs.getString("accommodation"));
+				trip.setAccommodationArrival(rs.getString("accommodationArrival"));
+				trip.setAccommodationDeparture(rs.getString("accommodationDeparture"));
+			}
+			if (tripType.equals("DayTeacher")) {
+				trip.setSundryFee(rs.getDouble("sundryFee"));
+				trip.setVenue(rs.getString("venue"));
+			}				
 			results.add(trip);
 		}
 		return results;
