@@ -13,6 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
+import userInterface.panels.GroupsTabPanel;
+import userInterface.panels.HelpTabPanel;
+import userInterface.panels.TripsTabPanel;
+
 /**
  * 
  * @author Ella Love

@@ -1,12 +1,11 @@
 /**
  * 
  */
-package userInterfaces;
+package userInterface.panels;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -17,26 +16,19 @@ import javax.swing.LayoutStyle.ComponentPlacement;
  *
  */
 @SuppressWarnings("serial")
-public class VenuePanel extends JPanel {
-	private JTextField txtVenue;
+public class VenueDisplayPanel extends JPanel {
+	private JLabel lblVenueDb;
 
 	/**
 	 * Create the panel.
 	 */
-	public VenuePanel() {
+	public VenueDisplayPanel() {
 		
-		initComponents();
-	}
-
-	private void initComponents() {
-		
-		//Create the label
+		//Create the labels
 		JLabel lblVenue = new JLabel("Venue:");
 		lblVenue.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
-		//Create the text field
-		txtVenue = new JTextField();
-		txtVenue.setColumns(10);
+		lblVenueDb = new JLabel("");
 		
 		//Apply a group layout
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -46,7 +38,7 @@ public class VenuePanel extends JPanel {
 					.addContainerGap()
 					.addComponent(lblVenue, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(txtVenue, GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+					.addComponent(lblVenueDb, GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -55,18 +47,17 @@ public class VenuePanel extends JPanel {
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblVenue)
-						.addComponent(txtVenue, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblVenueDb))
 					.addContainerGap(275, Short.MAX_VALUE))
 		);
-		setLayout(groupLayout);		
+		setLayout(groupLayout);
 	}
 	
 	/**
-	 * Gets the content of the venue text box
-	 * @return venue
+	 * Set the text of the venue label 
+	 * @param venue
 	 */
-	public String getVenue(){ 
-		String venue = txtVenue.getText(); 
-		return venue;
+	public void setVenueLabel(String venue) {
+		lblVenueDb.setText(venue);
 	}
 }

@@ -36,7 +36,7 @@ public class GroupQueries {
 		String query = "INSERT INTO TripOrganiser.Group(groupName) VALUES (?);";
 
 		try {
-			queryRunner.execute(query, new GroupResultSetHandler(), group.getGroupName());
+			queryRunner.execute(query, group.getGroupName());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -50,11 +50,9 @@ public class GroupQueries {
 	public void removeGroup(int groupId) {
 		
 		String query = "DELETE FROM TripOrganiser.Group WHERE GroupId = ?";
-		
-		//TODO Remove the students from the group
 
 		try {
-			queryRunner.execute(query, new GroupResultSetHandler(), groupId);
+			queryRunner.execute(query, groupId);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

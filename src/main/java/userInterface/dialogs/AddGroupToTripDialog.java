@@ -1,7 +1,7 @@
 /**
  * 
  */
-package userInterfaces;
+package userInterface.dialogs;
 
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
@@ -14,22 +14,22 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTree;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
 
 import Models.Group;
 import Models.Student;
 import Queries.GroupQueries;
+import Queries.StudentQueries;
 import TableModels.GroupTableModel;
 import TableModels.StudentTableModel;
+import userInterface.panels.TripsTabPanel;
 
 /**
  * @author Ella Love
@@ -139,7 +139,7 @@ public class AddGroupToTripDialog extends JDialog {
 		spGroups.setViewportView(tblGroups);
 
 		Integer groupId = getGroupId();
-		
+
 		// Student Table
 		// Query the db to get the data to fill the rows and add it to an array
 		// list
@@ -180,10 +180,32 @@ public class AddGroupToTripDialog extends JDialog {
 		// The OK button is clicked
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO add the students to the group
+
+				// Get the trip ID
+				int tripId = TripsTabPanel.getTripId();
+				// Get the selected group ID
+				int groupId = getGroupId();
+
+				// Get the students from the group
+				ArrayList<Student> students = new GroupQueries().getStudentsFromGroup(groupId);
+
+				// For each student in the list:
+				for (Student student : students) {
+
+					// Get the student ID
+					int studentId = student.getStudentId();
+					// Add the student to the db
+					new StudentQueries().addStudentToTrip(studentId, tripId);
+				}
+				// Update the student table on the trip panel
+				TripsTabPanel.updateStudentTable();
+				
+				// Show a dialog to the user, verifying that the action was
+				// successful
+				JOptionPane.showMessageDialog(null, "Students added to trip succesfully.");
 			}
 		});
-		
+
 		// When a selection is made in the groups table
 		tblGroups.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
@@ -195,7 +217,7 @@ public class AddGroupToTripDialog extends JDialog {
 			}
 		});
 	}
-	
+
 	/**
 	 * Get the id of the selected group
 	 * 
@@ -214,7 +236,7 @@ public class AddGroupToTripDialog extends JDialog {
 
 		return groupId;
 	}
-	
+
 	/**
 	 * Updates the table of students
 	 */

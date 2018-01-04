@@ -1,7 +1,7 @@
 /**
  * 
  */
-package userInterfaces;
+package userInterface.panels;
 
 import java.awt.Font;
 

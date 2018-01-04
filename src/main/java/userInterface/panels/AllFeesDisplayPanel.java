@@ -1,7 +1,7 @@
 /**
  * 
  */
-package userInterfaces;
+package userInterface.panels;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;

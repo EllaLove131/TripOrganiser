@@ -61,7 +61,7 @@ public class TripTableModel extends AbstractTableModel {
 
 		// check the row is valid
 		if (row > trips.size() || row < 0) {
-			return null;
+			return 0;
 		}
 
 		Trip trip = trips.get(row);

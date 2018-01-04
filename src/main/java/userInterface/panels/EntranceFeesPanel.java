@@ -1,7 +1,7 @@
 /**
  * 
  */
-package userInterfaces;
+package userInterface.panels;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
@@ -9,6 +9,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 /**
  * @author Ella Love
@@ -39,6 +40,8 @@ public class EntranceFeesPanel extends JPanel {
 		txtEntranceFees = new JTextField();
 		txtEntranceFees.setColumns(10);
 		
+		JLabel lblPound = new JLabel("£");
+		
 		//Apply the group layout
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -50,22 +53,23 @@ public class EntranceFeesPanel extends JPanel {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(10)
 							.addComponent(lblEntranceFees, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
-							.addGap(6)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblPound)
+							.addGap(4)
 							.addComponent(txtEntranceFees, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(135, Short.MAX_VALUE))
+					.addContainerGap(246, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblFees)
-					.addGap(6)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblEntranceFees))
+					.addGap(9)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblEntranceFees)
+						.addComponent(lblPound)
 						.addComponent(txtEntranceFees, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(249, Short.MAX_VALUE))
+					.addContainerGap(14, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);		
 	}

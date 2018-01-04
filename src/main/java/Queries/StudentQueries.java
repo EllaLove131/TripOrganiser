@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import org.apache.commons.dbutils.QueryRunner;
 
 import Models.Student;
-import ResultSetHandlers.AutoGenKeyResultSetHandler;
 import triporganiser.triporganiser.DatabaseConnectionPoolHandler;
 
 /**
@@ -33,7 +32,7 @@ public class StudentQueries {
 		String query = "INSERT INTO Student(firstName, lastName, mobileNo) VALUES (?, ?, ?)";
 
 		try {
-			Integer studentId = queryRunner.insert(query, new AutoGenKeyResultSetHandler(), student.getFirstName(),
+			Integer studentId = queryRunner.execute(query, student.getFirstName(),
 					student.getLastName(), student.getMobileNo());
 
 			student.setStudentId(studentId.intValue());
@@ -60,6 +59,21 @@ public class StudentQueries {
 	}
 
 	/**
+	 * Add a student to a trip 
+	 * @param studentId
+	 * @param tripId
+	 */
+	public void addStudentToTrip(int studentId, int tripId) {
+		
+		String query = "INSERT INTO StudentTrip(studentId, tripId) VALUES (?, ?)";
+		
+		try {
+			queryRunner.execute(query, studentId, tripId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
 	 * Remove a student from the database
 	 * 
 	 * @param studentId
@@ -68,31 +82,15 @@ public class StudentQueries {
 
 		String query = "DELETE FROM Student WHERE StudentId = ? ";
 		String query2 = "DELETE FROM StudentGroup WHERE StudentId = ? ";
+		String query3 = "DELETE FROM StudentTrip WHERE StudentId = ? ";
 
 		try {
-			queryRunner.execute(query, new AutoGenKeyResultSetHandler(), studentId);
-			queryRunner.execute(query2, new AutoGenKeyResultSetHandler(), studentId);
-
+			queryRunner.execute(query, studentId);
+			queryRunner.execute(query2, studentId);
+			queryRunner.execute(query3, studentId);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-//
-//	/**
-//	 * Get all students
-//	 * 
-//	 * @return and arraylist of students
-//	 */
-//	public ArrayList<Student> getAllStudents() {
-//
-//		ArrayList<Student> results = new ArrayList<Student>();
-//
-//		try {
-//			results = queryRunner.query("SELECT * FROM Student", new StudentResultSetHandler());
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return results;
-//	}
 }

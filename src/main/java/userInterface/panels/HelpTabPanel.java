@@ -1,7 +1,7 @@
 /**
  * 
  */
-package userInterfaces;
+package userInterface.panels;
 
 /**
  * @author Ella Love

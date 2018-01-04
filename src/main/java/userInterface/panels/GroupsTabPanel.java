@@ -1,7 +1,7 @@
 /**
  * 
  */
-package userInterfaces;
+package userInterface.panels;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +24,8 @@ import Queries.GroupQueries;
 import Queries.StudentQueries;
 import TableModels.GroupTableModel;
 import TableModels.StudentTableModel;
+import userInterface.dialogs.AddGroupDialog;
+import userInterface.dialogs.AddStudentDialog;
 
 import javax.swing.JLabel;
 
@@ -82,7 +84,6 @@ public class GroupsTabPanel extends JPanel {
 		// Query the db to get the data to fill the rows and add it to an array
 		// list
 		ArrayList<Student> students = new ArrayList<Student>();
-
 		// If there are any groups
 		if (groupId != null) {
 			students = groupQueries.getStudentsFromGroup(groupId.intValue());
@@ -139,11 +140,11 @@ public class GroupsTabPanel extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(spGroup, GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+						.addComponent(spGroup, GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblSelectedStudents)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(spStudents, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(spStudents, GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
@@ -151,7 +152,7 @@ public class GroupsTabPanel extends JPanel {
 							.addComponent(btnAddStudent))
 						.addComponent(btnRemoveGroup)
 						.addComponent(btnRemoveStudent))
-					.addContainerGap())
+					.addGap(4))
 		);
 
 		setLayout(groupLayout);
@@ -177,12 +178,10 @@ public class GroupsTabPanel extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 
 				// Get Group id from the selected row
-				int selectedRow = tblGroups.getSelectedRow();
-				int groupId = (Integer) tblGroups.getModel().getValueAt(selectedRow, GroupTableModel.GROUP_ID_COLUMN);
+				int groupId = getGroupId();
 
 				// Delete the group with that id
-				GroupQueries groupQueries = new GroupQueries();
-				groupQueries.removeGroup(groupId);
+				new GroupQueries().removeGroup(groupId);
 
 				// Update the table
 				updateGroupTable();
@@ -209,8 +208,7 @@ public class GroupsTabPanel extends JPanel {
 						StudentTableModel.STUDENT_ID_COLUMN);
 
 				// Delete the student with that id
-				StudentQueries studentQueries = new StudentQueries();
-				studentQueries.removeStudent(studentId);
+				new StudentQueries().removeStudent(studentId);
 
 				// Update the table
 				updateStudentTable();

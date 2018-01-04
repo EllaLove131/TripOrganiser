@@ -1,7 +1,7 @@
 /**
  * 
  */
-package userInterfaces;
+package userInterface.dialogs;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -23,6 +23,7 @@ import javax.swing.border.EmptyBorder;
 
 import Models.Student;
 import Queries.StudentQueries;
+import userInterface.panels.GroupsTabPanel;
 
 /**
  * @author Ella Love

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package userInterfaces;
+package userInterface.panels;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
@@ -51,8 +51,8 @@ public class TravelPanel extends JPanel {
 		lblArrival.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		//Create the combo box and fill it's options
-		cboType = new JComboBox();
-		cboType.setModel(new DefaultComboBoxModel(new String[] {"Bus", "Walk", "Car", "Plane", "Other"}));
+		cboType = new JComboBox<Object>();
+		cboType.setModel(new DefaultComboBoxModel<Object>(new String[] {"Bus", "Walk", "Car", "Plane", "Other"}));
 		
 		//Create the text fields
 		txtDeparture = new JTextField();

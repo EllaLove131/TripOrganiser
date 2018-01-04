@@ -1,7 +1,7 @@
 /**
  * 
  */
-package userInterfaces;
+package userInterface.panels;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
@@ -213,7 +213,7 @@ public class TripDisplayPanel extends JPanel {
 	 * Set the text for the approval required label
 	 * @param approval
 	 */
-	public void setApprovalLabel(Boolean approval) {
+	public void setApprovalLabel(Boolean approval) {	
 		if (approval) {
 			lblApprovalDb.setText("Yes");
 		} else { 

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package userInterfaces;
+package userInterface.dialogs;
 
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -24,6 +24,13 @@ import javax.swing.border.EmptyBorder;
 
 import Models.Trip;
 import Queries.TripQueries;
+import userInterface.panels.AccommodationPanel;
+import userInterface.panels.AllFeesPanel;
+import userInterface.panels.EntranceFeesPanel;
+import userInterface.panels.TravelPanel;
+import userInterface.panels.TripPanel;
+import userInterface.panels.TripsTabPanel;
+import userInterface.panels.VenuePanel;
 
 /**
  * 
