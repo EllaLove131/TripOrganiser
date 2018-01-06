@@ -1,7 +1,3 @@
-/**
- * Dialog used for informing the user of an invalid data entry, creates the dialog
- * and its event handlers the dialog takes in a string to display a relevant message
- */
 package userInterface.dialogs;
 
 import java.awt.BorderLayout;
@@ -19,6 +15,9 @@ import java.awt.Toolkit;
 /**
  * @author Ella Love
  *
+ *         Dialog used for informing the user of an invalid data entry, creates
+ *         the dialog and its event handlers the dialog takes in a string to
+ *         display a relevant message
  */
 @SuppressWarnings("serial")
 public class InvalidDataDialog extends JDialog {

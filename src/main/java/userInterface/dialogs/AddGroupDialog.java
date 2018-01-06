@@ -1,7 +1,3 @@
-/**
- * Dialog used for adding groups to the database, creates the dialog and 
- * its event handlers
- */
 package userInterface.dialogs;
 
 import java.awt.FlowLayout;
@@ -29,6 +25,8 @@ import userInterface.panels.GroupsTabPanel;
 /**
  * @author Ella Love
  *
+ * Dialog used for adding groups to the database, creates the dialog and 
+ * its event handlers
  */
 @SuppressWarnings("serial")
 public class AddGroupDialog extends JDialog {
@@ -160,7 +158,7 @@ public class AddGroupDialog extends JDialog {
 
 				// Verify the data
 				if (!newGroup.setGroupName(groupName)) {
-					errorMessage = "Name field is empty";
+					errorMessage = "Name field is empty or contains too many characters.";
 				}
 
 				// If there is no validation issue

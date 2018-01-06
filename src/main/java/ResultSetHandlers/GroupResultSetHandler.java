@@ -1,6 +1,3 @@
-/**
- * Used to convert group result sets into group objects 
- */
 package ResultSetHandlers;
 
 import java.sql.ResultSet;
@@ -14,22 +11,22 @@ import Models.Group;
 /**
  * @author Ella Love
  *
+ *         Used to convert group result sets into group objects
  */
 public class GroupResultSetHandler implements ResultSetHandler<ArrayList<Group>> {
 
-public ArrayList<Group> handle(ResultSet rs) throws SQLException {
-		
-        ArrayList<Group> results = new ArrayList<Group>();
-        
-        while (rs.next())
-        {
-            Group group = new Group();
+	public ArrayList<Group> handle(ResultSet rs) throws SQLException {
 
-            group.setGroupId(rs.getInt("groupId"));
-            group.setGroupName(rs.getString("groupName"));
+		ArrayList<Group> results = new ArrayList<Group>();
 
-	        results.add(group);
-        }
-        return results;
+		while (rs.next()) {
+			Group group = new Group();
+
+			group.setGroupId(rs.getInt("groupId"));
+			group.setGroupName(rs.getString("groupName"));
+
+			results.add(group);
+		}
+		return results;
 	}
 }

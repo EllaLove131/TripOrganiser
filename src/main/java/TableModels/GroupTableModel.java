@@ -1,6 +1,3 @@
-/**
- * Specifies the methods the group table will use to interrogate a tabular data model
- */
 package TableModels;
 
 import java.util.ArrayList;
@@ -12,6 +9,8 @@ import Models.Group;
 /**
  * @author Ella Love
  *
+ *         Specifies the methods the group table will use to interrogate a
+ *         tabular data model
  */
 @SuppressWarnings("serial")
 public class GroupTableModel extends AbstractTableModel {
@@ -40,17 +39,15 @@ public class GroupTableModel extends AbstractTableModel {
 
 	// The object to place into a cell
 	public Object getValueAt(int row, int col) {
-		if (groups.isEmpty())
-		{
+		if (groups.isEmpty()) {
 			return null;
 		}
-		
+
 		// check the row is valid
-		if (row > groups.size() || row < 0)
-		{
+		if (row > groups.size() || row < 0) {
 			return null;
 		}
-		
+
 		Group group = groups.get(row);
 		switch (col) {
 		case GROUP_NAME_COLUMN:
@@ -61,7 +58,7 @@ public class GroupTableModel extends AbstractTableModel {
 			return null;
 		}
 	}
-	
+
 	// Get the name of the column
 	public String getColumnName(int col) {
 		return columns[col];

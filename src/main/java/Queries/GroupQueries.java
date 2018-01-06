@@ -1,6 +1,3 @@
-/**
- * A container for database queries relating to groups
- */
 package Queries;
 
 import java.sql.SQLException;
@@ -17,6 +14,7 @@ import triporganiser.triporganiser.DatabaseConnectionPoolHandler;
 /**
  * @author Ella Love
  *
+ *         A container for database queries relating to groups
  */
 public class GroupQueries {
 
@@ -48,7 +46,7 @@ public class GroupQueries {
 	 * @param groupId
 	 */
 	public void removeGroup(int groupId) {
-		
+
 		String query = "DELETE FROM TripOrganiser.Group WHERE GroupId = ?";
 
 		try {
@@ -68,24 +66,23 @@ public class GroupQueries {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return results;
 	}
-	
-	 /**
-	  * get the students in a given group
-	  * @param groupId
-	  * @return results
-	  */
-	public ArrayList<Student> getStudentsFromGroup(int groupId) { 
-		
+
+	/**
+	 * get the students in a given group
+	 * 
+	 * @param groupId
+	 * @return results
+	 */
+	public ArrayList<Student> getStudentsFromGroup(int groupId) {
+
 		ArrayList<Student> results = new ArrayList<Student>();
-		
-		String query = "SELECT Student.studentId, firstName, lastName, mobileNo "
-				+ "FROM Student "
-				+ "LEFT JOIN StudentGroup ON Student.studentId = StudentGroup.studentId "
-				+ "WHERE groupId = ?";
-		
+
+		String query = "SELECT Student.studentId, firstName, lastName, mobileNo " + "FROM Student "
+				+ "LEFT JOIN StudentGroup ON Student.studentId = StudentGroup.studentId " + "WHERE groupId = ?";
+
 		try {
 			results = queryRunner.query(query, new StudentResultSetHandler(), groupId);
 

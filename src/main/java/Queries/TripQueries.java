@@ -1,6 +1,3 @@
-/**
- * A container for database queries relating to trips
- */
 package Queries;
 
 import java.sql.SQLException;
@@ -17,6 +14,7 @@ import triporganiser.triporganiser.DatabaseConnectionPoolHandler;
 /**
  * @author Ella Love
  *
+ *         A container for database queries relating to trips
  */
 public class TripQueries {
 
@@ -35,8 +33,7 @@ public class TripQueries {
 
 		String query = "INSERT INTO Trip(tripName, tripType, startDate, endDate, entranceFee, sundryFee, transportType, "
 				+ "transportDeparture, transportArrival, venue, accommodation, accommodationArrival, "
-				+ "accommodationDeparture, approvalRequired) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+				+ "accommodationDeparture, approvalRequired) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 		try {
 			queryRunner.execute(query, trip.getTripName(), trip.getTripType(), trip.getStartDate(), trip.getEndDate(),
@@ -76,8 +73,9 @@ public class TripQueries {
 
 		ArrayList<StudentTrip> results = new ArrayList<StudentTrip>();
 
-		String query = "SELECT Student.studentId, firstName, lastName, mobileNo, StudentTrip.studentTripId, StudentTrip.paid, StudentTrip.authorisation " + "FROM Student "
-				+ "LEFT JOIN StudentTrip ON Student.studentId = StudentTrip.studentId " + "WHERE tripId = ?";
+		String query = "SELECT Student.studentId, firstName, lastName, mobileNo, StudentTrip.studentTripId, StudentTrip.paid, StudentTrip.authorisation "
+				+ "FROM Student " + "LEFT JOIN StudentTrip ON Student.studentId = StudentTrip.studentId "
+				+ "WHERE tripId = ?";
 
 		try {
 			results = queryRunner.query(query, new StudentTripResultSetHandler(), tripId);
@@ -87,57 +85,73 @@ public class TripQueries {
 		}
 		return results;
 	}
-	
+
 	/**
 	 * Removes a student from a trip
+	 * 
 	 * @param studentId
 	 */
-	public void removeStudentFromTrip(int studentId) { 
+	public void removeStudentFromTrip(int studentId) {
 
 		String query = "DELETE FROM StudentTrip WHERE StudentId = ? ";
 
 		try {
 			queryRunner.execute(query, studentId);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Removes a trip
 	 */
-	public void removeTrip(int tripId) { 
-		
+	public void removeTrip(int tripId) {
+
 		String query = "DELETE FROM Trip WHERE tripId = ? ";
 
 		try {
 			queryRunner.execute(query, tripId);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Updates the paid field in the db, stating if it's paid or not
+	 * 
+	 * @param studentTripId
+	 * @param value
+	 *            true/false
+	 */
 	public void setPaid(int studentTripId, Boolean value) {
-		
+
 		String query = "UPDATE StudentTrip SET paid = ? WHERE studentTripId = ? ";
 
 		try {
 			queryRunner.execute(query, value, studentTripId);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void setAuthorisation(int studentTripId, Boolean value) { 
-		
+
+	/**
+	 * Updates the authorisation field in the db, stating if it's authorised or
+	 * not
+	 * 
+	 * @param studentTripId
+	 * @param value
+	 *            true/false
+	 */
+	public void setAuthorisation(int studentTripId, Boolean value) {
+
 		String query = "UPDATE StudentTrip SET authorisation = ? WHERE studentTripId = ? ";
 
 		try {
 			queryRunner.execute(query, value, studentTripId);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

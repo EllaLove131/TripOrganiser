@@ -1,12 +1,10 @@
-/**
- * A student container class for storing student information.
- */
 package Models;
 
 /**
  * 
  * @author Ella Love
  *
+ *         A student container class for storing student information.
  */
 public class Student implements IStudentProvider {
 
@@ -34,7 +32,7 @@ public class Student implements IStudentProvider {
 	}
 
 	public boolean setFirstName(String firstName) {
-		if (firstName.isEmpty()) {
+		if (firstName.isEmpty() || firstName.length() > 30) {
 			return false;
 		}
 
@@ -47,7 +45,7 @@ public class Student implements IStudentProvider {
 	}
 
 	public boolean setLastName(String lastName) {
-		if (lastName.isEmpty()) {
+		if (lastName.isEmpty() || lastName.length() > 30) {
 			return false;
 		}
 		this.lastName = lastName;

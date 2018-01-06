@@ -1,7 +1,3 @@
-/**
- * Dialog used for adding students to groups in the database, creates the 
- * dialog and its event handlers
- */
 package userInterface.dialogs;
 
 import java.awt.FlowLayout;
@@ -29,6 +25,8 @@ import userInterface.panels.GroupsTabPanel;
 /**
  * @author Ella Love
  *
+ *         Dialog used for adding students to groups in the database, creates
+ *         the dialog and its event handlers
  */
 @SuppressWarnings("serial")
 public class AddStudentDialog extends JDialog {
@@ -179,23 +177,23 @@ public class AddStudentDialog extends JDialog {
 
 				// Verify the data
 				if (!newStudent.setFirstName(firstName)) {
-					errorMessage = "First Name field is empty";
+					errorMessage = "First Name field is empty or contains too many characters.";
 				}
 
 				if (!newStudent.setLastName(lastName)) {
-					errorMessage = "Last Name field is empty";
+					errorMessage = "Last Name field is empty or contains too many characters.";
 				}
 
 				if (!newStudent.setMobileNo(mobileNo)) {
-					errorMessage = "Mobile Number field is invalid";
+					errorMessage = "Mobile Number field is invalid.";
 				}
 
 				// If there is no validation issue
 				if (errorMessage.isEmpty()) {
 
-					//Get the groupId 
+					// Get the groupId
 					int groupId = GroupsTabPanel.getGroupId();
-					
+
 					// Add the student to the db
 					StudentQueries studentQueries = new StudentQueries();
 					studentQueries.addStudent(newStudent);

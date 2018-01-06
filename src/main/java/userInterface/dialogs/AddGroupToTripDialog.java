@@ -1,8 +1,3 @@
-/**
- * Dialog used for adding groups to trips in the database, creates 
- * the dialog and its event handlers
- * accesses the database for student and group information
- */
 package userInterface.dialogs;
 
 import java.awt.FlowLayout;
@@ -36,6 +31,9 @@ import userInterface.panels.TripsTabPanel;
 /**
  * @author Ella Love
  *
+ *         Dialog used for adding groups to trips in the database, creates the
+ *         dialog and its event handlers accesses the database for student and
+ *         group information
  */
 @SuppressWarnings("serial")
 public class AddGroupToTripDialog extends JDialog {
@@ -205,7 +203,7 @@ public class AddGroupToTripDialog extends JDialog {
 				}
 				// Update the student table on the trip panel
 				TripsTabPanel.updateStudentTripTable();
-				
+
 				// Show a dialog to the user, verifying that the action was
 				// successful
 				JOptionPane.showMessageDialog(null, "Students added to trip succesfully.");

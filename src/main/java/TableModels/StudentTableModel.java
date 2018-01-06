@@ -1,6 +1,3 @@
-/**
- * Specifies the methods the student table will use to interrogate a tabular data model
- */
 package TableModels;
 
 import java.util.ArrayList;
@@ -13,6 +10,8 @@ import Models.Student;
 /**
  * @author Ella Love
  *
+ *         Specifies the methods the student table will use to interrogate a
+ *         tabular data model
  */
 @SuppressWarnings("serial")
 public class StudentTableModel extends AbstractTableModel {
@@ -21,7 +20,7 @@ public class StudentTableModel extends AbstractTableModel {
 	public static final int LAST_NAME_COLUMN = 1;
 	public static final int MOBILE_NO_COLUMN = 2;
 	public static final int STUDENT_ID_COLUMN = -1;
-	
+
 	protected IStudentProvider[] students;
 	protected String[] columns;
 
@@ -30,7 +29,7 @@ public class StudentTableModel extends AbstractTableModel {
 		students = studentList;
 		columns = new String[] { "First Name", "Last Name", "Mobile Number" };
 	}
-	
+
 	public StudentTableModel(ArrayList<Student> studentList) {
 		super();
 		students = studentList.toArray(new Student[studentList.size()]);

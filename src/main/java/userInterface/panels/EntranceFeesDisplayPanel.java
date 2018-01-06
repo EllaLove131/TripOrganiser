@@ -1,11 +1,21 @@
 package userInterface.panels;
 
-import javax.swing.JPanel;
+import java.awt.Font;
+import java.text.DecimalFormat;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
-import java.awt.Font;
+import javax.swing.JPanel;
 
+/**
+ * 
+ * @author Ella Love
+ *
+ *         Creates the trip fee display panel that displays trip fee information
+ *         when added to a panel. Includes the entrance fee only. Allows for the
+ *         setting of values within the text labels
+ */
 @SuppressWarnings("serial")
 public class EntranceFeesDisplayPanel extends JPanel {
 	private JLabel lblEntranceFeeDb;
@@ -15,7 +25,7 @@ public class EntranceFeesDisplayPanel extends JPanel {
 	 */
 	public EntranceFeesDisplayPanel() {
 
-		//Create the labels
+		// Create the labels
 		JLabel lblFees = new JLabel("Trip Fees");
 		lblFees.setFont(new Font("Tahoma", Font.BOLD, 11));
 
@@ -23,8 +33,8 @@ public class EntranceFeesDisplayPanel extends JPanel {
 		lblEntranceFee.setFont(new Font("Tahoma", Font.BOLD, 11));
 
 		lblEntranceFeeDb = new JLabel("");
-		
-		//Apply a group layout
+
+		// Apply a group layout
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
@@ -51,6 +61,8 @@ public class EntranceFeesDisplayPanel extends JPanel {
 	 *            fee
 	 */
 	public void setEntranceFeeLabel(Double entranceFee) {
+		DecimalFormat df = new DecimalFormat(".##");
+		df.format(entranceFee);
 		String entrance = Double.toString(entranceFee);
 		lblEntranceFeeDb.setText("£ " + entrance);
 	}

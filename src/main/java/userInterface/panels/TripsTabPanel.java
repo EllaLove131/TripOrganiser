@@ -32,6 +32,10 @@ import userInterface.dialogs.AddTripDialog;
  * 
  * @author Ella Love
  *
+ *         The panel added to the tabular display within the main container.
+ *         Contains trip details including assigned student and their payment
+ *         and authorisation status. Allows for the addition and removal of
+ *         trips as well as the assigning of students.
  */
 @SuppressWarnings("serial")
 public class TripsTabPanel extends JPanel {
@@ -94,49 +98,31 @@ public class TripsTabPanel extends JPanel {
 		// to the pane
 		// along with a position or alignment
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnAddTrip)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnRemoveTrip))
-						.addComponent(spTrips, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(displayPanel, GroupLayout.PREFERRED_SIZE, 307, GroupLayout.PREFERRED_SIZE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(142)
-							.addComponent(btnAddStudent)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnRemoveStudent))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(spStudents, GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(spTrips, GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(spStudents, GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
-								.addComponent(displayPanel, GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnAddTrip)
-						.addComponent(btnRemoveTrip)
-						.addComponent(btnRemoveStudent)
-						.addComponent(btnAddStudent))
-					.addContainerGap())
-		);
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup().addComponent(btnAddTrip)
+										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnRemoveTrip))
+								.addComponent(spTrips, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(displayPanel, GroupLayout.PREFERRED_SIZE, 307, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(spStudents, GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE).addGroup(
+										groupLayout.createSequentialGroup().addComponent(btnAddStudent)
+												.addPreferredGap(ComponentPlacement.RELATED).addComponent(
+														btnRemoveStudent)))
+						.addContainerGap()));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(spTrips, GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
+								.addComponent(spStudents, GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
+								.addComponent(displayPanel, GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(btnAddTrip)
+								.addComponent(btnRemoveTrip).addComponent(btnRemoveStudent).addComponent(btnAddStudent))
+						.addContainerGap()));
 
 		// Give the display pane a y-axis box layout
 		displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.Y_AXIS));
@@ -160,13 +146,15 @@ public class TripsTabPanel extends JPanel {
 		Integer tripId = getTripId();
 		ArrayList<StudentTrip> studentTrips = new ArrayList<StudentTrip>();
 
+		// get the trip type to pass into the table model
+		String tripType = getTripType();
 		// If there are any trips
 		if (tripId != null) {
 			studentTrips = tripQueries.getStudentsFromTrip(tripId.intValue());
 		}
 		// Create the table model for trips
-		StudentTripTableModel studentTripTableModel = 
-				new StudentTripTableModel(studentTrips.toArray(new StudentTrip[studentTrips.size()]));
+		StudentTripTableModel studentTripTableModel = new StudentTripTableModel(
+				studentTrips.toArray(new StudentTrip[studentTrips.size()]), tripType);
 		// Create the table using the table model
 		tblStudents = new JTable(studentTripTableModel);
 		tblStudents.setToolTipText("The students attending the selected trip");
@@ -226,7 +214,7 @@ public class TripsTabPanel extends JPanel {
 				if (selectedRow == -1) {
 					selectedRow = 0;
 				}
-				
+
 				// Get the Data to populate the display with (For all trip
 				// types)
 				String tripName = (String) tblTrips.getModel().getValueAt(selectedRow, TripTableModel.TRIP_NAME_COLUMN);
@@ -339,11 +327,11 @@ public class TripsTabPanel extends JPanel {
 		btnRemoveTrip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				//Remove the trip from the db 
+				// Remove the trip from the db
 				int tripId = getTripId();
 				new TripQueries().removeTrip(tripId);
-				
-				//Update the table
+
+				// Update the table
 				updateTripTable();
 				updateStudentTripTable();
 			}
@@ -425,9 +413,10 @@ public class TripsTabPanel extends JPanel {
 	public static void updateStudentTripTable() {
 		TripQueries tripQueries = new TripQueries();
 		int tripId = getTripId();
+		String tripType = getTripType();
 		ArrayList<StudentTrip> studentTrips = tripQueries.getStudentsFromTrip(tripId);
-		StudentTableModel studentTableModel =
-				new StudentTripTableModel(studentTrips.toArray(new StudentTrip[studentTrips.size()]));
+		StudentTableModel studentTableModel = new StudentTripTableModel(
+				studentTrips.toArray(new StudentTrip[studentTrips.size()]), tripType);
 		tblStudents.setModel(studentTableModel);
 	}
 }

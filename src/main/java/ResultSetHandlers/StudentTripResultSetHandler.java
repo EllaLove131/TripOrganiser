@@ -10,6 +10,12 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import Models.Student;
 import Models.StudentTrip;
 
+/**
+ * 
+ * @author Ella Love
+ *
+ * Used to convert student trip result sets into student trip objects 
+ */
 public class StudentTripResultSetHandler implements ResultSetHandler<ArrayList<StudentTrip>> {
 
 	public ArrayList<StudentTrip> handle(ResultSet rs) throws SQLException {
@@ -33,8 +39,6 @@ public class StudentTripResultSetHandler implements ResultSetHandler<ArrayList<S
         		results.add(studentTrip);
         	}
         }
-
 		return results;
-	}
-        
+	}   
 }

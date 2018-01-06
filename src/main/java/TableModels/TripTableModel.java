@@ -13,6 +13,8 @@ import Models.Trip;
  * 
  * @author Ella Love
  *
+ *         Specifies the methods the trip table will use to interrogate a
+ *         tabular data model 
  */
 @SuppressWarnings("serial")
 public class TripTableModel extends AbstractTableModel {

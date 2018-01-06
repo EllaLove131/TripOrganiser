@@ -31,7 +31,9 @@ import javax.swing.JLabel;
 
 /**
  * @author Ella Love
- *
+ * 
+ *         The panel added to the tabular view within the main container.
+ *         Displays group and student data, allowing for additions and removals.
  */
 @SuppressWarnings("serial")
 public class GroupsTabPanel extends JPanel {
@@ -56,9 +58,9 @@ public class GroupsTabPanel extends JPanel {
 	 */
 	private void initComponents() {
 
-		//Create selected students label
+		// Create selected students label
 		JLabel lblSelectedStudents = new JLabel("Students within the selected group:");
-		
+
 		// Add group button, with image
 		btnAddGroup = new JButton("");
 		btnAddGroup.setToolTipText("Add a new group");
@@ -121,45 +123,34 @@ public class GroupsTabPanel extends JPanel {
 
 		// Layout
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(spGroup, GroupLayout.PREFERRED_SIZE, 264, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnAddGroup)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnRemoveGroup)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnAddStudent)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnRemoveStudent))
-						.addComponent(lblSelectedStudents)
-						.addComponent(spStudents, GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(spGroup, GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblSelectedStudents)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(spStudents, GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(btnAddGroup)
-							.addComponent(btnAddStudent))
-						.addComponent(btnRemoveGroup)
-						.addComponent(btnRemoveStudent))
-					.addGap(4))
-		);
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
+						.addGroup(groupLayout
+								.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(spGroup, GroupLayout.PREFERRED_SIZE, 264, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout
+										.createSequentialGroup().addComponent(btnAddGroup)
+										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnRemoveGroup)))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup().addComponent(btnAddStudent)
+										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnRemoveStudent))
+								.addComponent(lblSelectedStudents)
+								.addComponent(spStudents, GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE))
+						.addContainerGap()));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
+						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(spGroup, GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+								.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(lblSelectedStudents).addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(spStudents, GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(btnAddGroup)
+										.addComponent(btnAddStudent))
+								.addComponent(btnRemoveGroup).addComponent(btnRemoveStudent))
+						.addGap(4)));
 
 		setLayout(groupLayout);
 	}

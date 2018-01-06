@@ -1,6 +1,3 @@
-/**
- * Used to convert trip result sets into trip objects 
- */
 package ResultSetHandlers;
 
 import java.sql.ResultSet;
@@ -15,6 +12,7 @@ import Models.Trip;
  * 
  * @author Ella Love
  *
+ *         Used to convert trip result sets into trip objects
  */
 public class TripResultSetHandler implements ResultSetHandler<ArrayList<Trip>> {
 
@@ -37,7 +35,7 @@ public class TripResultSetHandler implements ResultSetHandler<ArrayList<Trip>> {
 			trip.setApprovalRequired(rs.getBoolean("approvalRequired"));
 
 			String tripType = trip.getTripType();
-			
+
 			if (tripType.equals("ResidentialTeacher")) {
 				trip.setSundryFee(rs.getDouble("sundryFee"));
 				trip.setVenue(rs.getString("venue"));
@@ -48,7 +46,7 @@ public class TripResultSetHandler implements ResultSetHandler<ArrayList<Trip>> {
 			if (tripType.equals("DayTeacher")) {
 				trip.setSundryFee(rs.getDouble("sundryFee"));
 				trip.setVenue(rs.getString("venue"));
-			}				
+			}
 			results.add(trip);
 		}
 		return results;

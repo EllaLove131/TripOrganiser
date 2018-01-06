@@ -1,6 +1,3 @@
-/**
- * 
- */
 package TableModels;
 
 import Models.StudentTrip;
@@ -10,6 +7,9 @@ import Queries.TripQueries;
  * 
  * @author Ella Love
  *
+ *         Specifies the methods the student trip table will use to interrogate a
+ *         tabular data model
+ * 
  */
 @SuppressWarnings("serial")
 public class StudentTripTableModel extends StudentTableModel {
@@ -20,11 +20,16 @@ public class StudentTripTableModel extends StudentTableModel {
 
 	private StudentTrip[] studentTrips;
 
-	public StudentTripTableModel(StudentTrip[] studentTripList) {
+	public StudentTripTableModel(StudentTrip[] studentTripList, String tripType) {
 		super(studentTripList);
 		studentTrips = studentTripList;
 
-		columns = new String[] { "First Name", "Last Name", "Mobile Number", "Paid", "Authorised" };
+		// if the authorisation column is needed, show it
+		if (tripType.equals("DayTeacher") || tripType.equals("DayExternal")) {
+			columns = new String[] { "First Name", "Last Name", "Mobile Number", "Paid" };
+		} else {
+			columns = new String[] { "First Name", "Last Name", "Mobile Number", "Paid", "Authorised" };
+		}
 	}
 
 	/**
@@ -53,7 +58,7 @@ public class StudentTripTableModel extends StudentTableModel {
 
 		TripQueries tripQueries = new TripQueries();
 		int studentTripId = studentTrips[row].getStudentTripId();
-				
+
 		switch (col) {
 		case PAID_COLUMN:
 			studentTrips[row].setPaid((Boolean) (value));

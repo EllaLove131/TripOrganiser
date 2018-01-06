@@ -1,7 +1,3 @@
-/**
- * Dialog used for adding trips to the database, creates the dialog and 
- * its event handlers
- */
 package userInterface.dialogs;
 
 import java.awt.Font;
@@ -37,6 +33,8 @@ import userInterface.panels.VenuePanel;
  * 
  * @author Ella Love
  *
+ *         Dialog used for adding trips to the database, creates the dialog
+ *         and its event handlers
  */
 @SuppressWarnings("serial")
 public class AddTripDialog extends JDialog {
@@ -208,7 +206,7 @@ public class AddTripDialog extends JDialog {
 		tripInputPanel.add(travelPanel);
 		tripInputPanel.add(allFeesPanel);
 		tripInputPanel.add(venuePanel);
-		//Set the default trip type 
+		// Set the default trip type
 		tripType = "DayTeacher";
 
 		// Make everything fit into the JDialog
@@ -316,14 +314,14 @@ public class AddTripDialog extends JDialog {
 				String endDate = tripPanel.getEndDate();
 				String travelType = travelPanel.getTravelType();
 				String travelDeparture = travelPanel.getTravelDeparture();
-				String travelArrival = travelPanel.getTravelArival();
+				String travelArrival = travelPanel.getTravelArrival();
 
 				// Verify this data
 				newTrip.setTransportType(travelType);
 				newTrip.setTripType(tripType);
-				
+
 				if (!newTrip.setTripName(tripName)) {
-					errorMessage = "Name field is empty";
+					errorMessage = "Name field is empty or contains too many characters.";
 				}
 
 				if (!newTrip.setStartDate(startDate)) {
@@ -351,46 +349,40 @@ public class AddTripDialog extends JDialog {
 					String accommodationDeparture = accommodationPanel.getAccommodationDeparture();
 
 					newTrip.setApprovalRequired(true);
-					
-					try
-					{
+
+					try {
 						Double sundryFee = allFeesPanel.getSundryFee();
-												
-						if (!newTrip.setEntranceFee(sundryFee)) {
-							errorMessage = "Sundry fee is empty";
+
+						if (!newTrip.setSundryFee(sundryFee)) {
+							errorMessage = "Sundry fee is empty or above 999999.99";
 						}
-					}
-					catch (NumberFormatException e)
-					{
+					} catch (NumberFormatException e) {
 						errorMessage = "Sundry fee needs to be a number";
 					}
-					
-					try
-					{
+
+					try {
 						Double entranceFee = allFeesPanel.getEntranceFee();
-												
+
 						if (!newTrip.setEntranceFee(entranceFee)) {
-							errorMessage = "Entrance fee is empty";
+							errorMessage = "Entrance fee is empty or above 999999.99";
 						}
-					}
-					catch (NumberFormatException e)
-					{
+					} catch (NumberFormatException e) {
 						errorMessage = "Entrance fee needs to be a number";
 					}
 
 					if (!newTrip.setVenue(venue)) {
-						errorMessage = "Venue is empty";
+						errorMessage = "Venue is empty or contains too many characters.";
 					}
-					
-					if(!newTrip.setAccommodation(accommodation)){
-						errorMessage = "Accommodation is empty";
+
+					if (!newTrip.setAccommodation(accommodation)) {
+						errorMessage = "Accommodation location is empty or contains too many characters.";
 					}
-					
-					if(!newTrip.setAccommodationArrival(accommodationArrival)){
+
+					if (!newTrip.setAccommodationArrival(accommodationArrival)) {
 						errorMessage = "Accommodation arrival is empty";
 					}
-					
-					if(!newTrip.setAccommodationDeparture(accommodationDeparture)){
+
+					if (!newTrip.setAccommodationDeparture(accommodationDeparture)) {
 						errorMessage = "Accommodation departure is empty";
 					}
 
@@ -399,89 +391,77 @@ public class AddTripDialog extends JDialog {
 					newTrip.setApprovalRequired(false);
 					String venue = venuePanel.getVenue();
 
-					try
-					{
+					try {
 						Double sundryFee = allFeesPanel.getSundryFee();
-												
-						if (!newTrip.setEntranceFee(sundryFee)) {
-							errorMessage = "Sundry fee is empty";
+
+						if (!newTrip.setSundryFee(sundryFee)) {
+							errorMessage = "Sundry fee is empty or above 999999.99";
 						}
-					}
-					catch (NumberFormatException e)
-					{
+					} catch (NumberFormatException e) {
 						errorMessage = "Sundry fee needs to be a number";
 					}
-					
-					try
-					{
+
+					try {
 						Double entranceFee = allFeesPanel.getEntranceFee();
-						
+
 						if (!newTrip.setEntranceFee(entranceFee)) {
-							errorMessage = "Entrance fee is empty";
+							errorMessage = "Entrance fee is empty or above 999999.99";
 						}
-					}
-					catch (NumberFormatException e)
-					{
+					} catch (NumberFormatException e) {
 						errorMessage = "Entrance fee needs to be a number";
 					}
-					
+
 					if (!newTrip.setVenue(venue)) {
-						errorMessage = "Venue is empty";
+						errorMessage = "Venue is empty or contains too many characters.";
 					}
 
 				} else if (tripType.equals("ResidentialExternal")) {
-					try
-					{
+					try {
 						Double entranceFee = entranceFeePanel.getEntranceFee();
-												
+
 						if (!newTrip.setEntranceFee(entranceFee)) {
-							errorMessage = "Entrance fee is empty";
+							errorMessage = "Entrance fee is empty or above 999999.99";
 						}
-					}
-					catch (NumberFormatException e)
-					{
+					} catch (NumberFormatException e) {
 						errorMessage = "Entrance fee needs to be a number";
 					}
-					
+
 					newTrip.setApprovalRequired(true);
 
 				} else if (tripType.equals("DayExternal")) {
-					
-					try
-					{
+
+					try {
 						Double entranceFee = entranceFeePanel.getEntranceFee();
-												
+
 						if (!newTrip.setEntranceFee(entranceFee)) {
-							errorMessage = "Entrance fee is empty";
+							errorMessage = "Entrance fee is empty or above 999999.99";
 						}
-					}
-					catch (NumberFormatException e)
-					{
+					} catch (NumberFormatException e) {
 						errorMessage = "Entrance fee needs to be a number";
 					}
 
 					newTrip.setApprovalRequired(false);
 
 				}
-				
+
 				// If the data is verified
 				if (errorMessage.isEmpty()) {
 					// Add the trip to the db
 					new TripQueries().addTrip(newTrip);
 					// Update the display
 					TripsTabPanel.updateTripTable();
-					
+
 					// Show a verification dialog
 					JOptionPane.showMessageDialog(null, "Trip added succesfully.");
 
 					// close the view
 					dispose();
 				} else {
-				// Show the invalid data dialog
-				InvalidDataDialog invalidDialog = new InvalidDataDialog();
-				invalidDialog.lblInfoText.setText(errorMessage);
-				invalidDialog.setVisible(true);
-			}
+					// Show the invalid data dialog
+					InvalidDataDialog invalidDialog = new InvalidDataDialog();
+					invalidDialog.lblInfoText.setText(errorMessage);
+					invalidDialog.setVisible(true);
+				}
 			}
 		});
 	}

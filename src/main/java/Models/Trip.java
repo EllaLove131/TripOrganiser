@@ -1,12 +1,10 @@
-/**
- * A trip container class for storing student information.
- */
 package Models;
 
 /**
  * 
  * @author Ella Love
  *
+ *         A trip container class for storing student information.
  */
 public class Trip {
 
@@ -41,7 +39,7 @@ public class Trip {
 	}
 
 	public boolean setTripName(String tripName) {
-		if (tripName.isEmpty()) {
+		if (tripName.isEmpty() || tripName.length() > 40) {
 			return false;
 		}
 		this.tripName = tripName;
@@ -77,10 +75,10 @@ public class Trip {
 	}
 
 	public boolean setEntranceFee(Double entranceFee) {
-		if (entranceFee == null) {
+		if (entranceFee == null || entranceFee > 999999.99) {
 			return false;
 		}
-		
+
 		this.entranceFee = entranceFee;
 		return true;
 	}
@@ -134,7 +132,7 @@ public class Trip {
 	}
 
 	public boolean setSundryFee(Double sundryFee) {
-		if (sundryFee == null) {
+		if (sundryFee == null || sundryFee > 999999.99) {
 			return false;
 		}
 		this.sundryFee = sundryFee;
@@ -146,7 +144,7 @@ public class Trip {
 	}
 
 	public boolean setVenue(String venue) {
-		if (venue.isEmpty()) {
+		if (venue.isEmpty() || venue.length() > 40) {
 			return false;
 		}
 		this.venue = venue;
@@ -158,11 +156,11 @@ public class Trip {
 	}
 
 	public boolean setAccommodation(String accommodation) {
-		if (accommodation.isEmpty()) {
-			return false; 
+		if (accommodation.isEmpty() || accommodation.length() > 40) {
+			return false;
 		}
 		this.accommodation = accommodation;
-		return true; 
+		return true;
 	}
 
 	public String getAccommodationArrival() {
@@ -170,8 +168,8 @@ public class Trip {
 	}
 
 	public boolean setAccommodationArrival(String accommodationArrival) {
-		if(accommodationArrival.isEmpty()){
-			return false; 
+		if (accommodationArrival.isEmpty()) {
+			return false;
 		}
 		this.accommodationArrival = accommodationArrival;
 		return true;
@@ -182,8 +180,8 @@ public class Trip {
 	}
 
 	public boolean setAccommodationDeparture(String accommodationDeparture) {
-		if(accommodationDeparture.isEmpty()){
-			return false; 
+		if (accommodationDeparture.isEmpty()) {
+			return false;
 		}
 		this.accommodationDeparture = accommodationDeparture;
 		return true;
