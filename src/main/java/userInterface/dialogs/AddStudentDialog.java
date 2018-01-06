@@ -1,5 +1,6 @@
 /**
- * 
+ * Dialog used for adding students to groups in the database, creates the 
+ * dialog and its event handlers
  */
 package userInterface.dialogs;
 
@@ -68,6 +69,7 @@ public class AddStudentDialog extends JDialog {
 			{
 				// Add the OK button to the button panel
 				btnOk = new JButton("");
+				btnOk.setToolTipText("Add new student");
 				btnOk.setIcon(new ImageIcon(AddStudentDialog.class.getResource("/resources/add.png")));
 				btnOk.setActionCommand("OK");
 				buttonPane.add(btnOk);
@@ -76,6 +78,7 @@ public class AddStudentDialog extends JDialog {
 			{
 				// Add the cancel button to the button panel
 				btnCancel = new JButton("");
+				btnCancel.setToolTipText("Cancel action");
 				btnCancel.setIcon(new ImageIcon(AddStudentDialog.class.getResource("/resources/remove.png")));
 				btnCancel.setActionCommand("Cancel");
 				buttonPane.add(btnCancel);
@@ -106,12 +109,15 @@ public class AddStudentDialog extends JDialog {
 
 		// Create the text fields
 		txtFirstName = new JTextField();
+		txtFirstName.setToolTipText("Enter the first name of the new student");
 		txtFirstName.setColumns(10);
 
 		txtLastName = new JTextField();
+		txtLastName.setToolTipText("Enter the last name of the new student");
 		txtLastName.setColumns(10);
 
 		txtMobileNo = new JTextField();
+		txtMobileNo.setToolTipText("Enter the mobile number of the new student");
 		txtMobileNo.setColumns(10);
 
 		// Apply group layouts

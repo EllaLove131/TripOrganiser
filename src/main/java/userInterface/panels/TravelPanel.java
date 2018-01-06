@@ -52,13 +52,16 @@ public class TravelPanel extends JPanel {
 		
 		//Create the combo box and fill it's options
 		cboType = new JComboBox<Object>();
+		cboType.setToolTipText("Select the transport type");
 		cboType.setModel(new DefaultComboBoxModel<Object>(new String[] {"Bus", "Walk", "Car", "Plane", "Other"}));
 		
 		//Create the text fields
 		txtDeparture = new JTextField();
+		txtDeparture.setToolTipText("Enter the time of departure");
 		txtDeparture.setColumns(10);
 		
 		txtArrival = new JTextField();
+		txtArrival.setToolTipText("Enter the time of arrival");
 		txtArrival.setColumns(10);
 		
 		//Apply  group layout

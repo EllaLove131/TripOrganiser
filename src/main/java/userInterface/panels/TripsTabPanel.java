@@ -19,10 +19,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import Models.Student;
+import Models.StudentTrip;
 import Models.Trip;
 import Queries.TripQueries;
 import TableModels.StudentTableModel;
+import TableModels.StudentTripTableModel;
 import TableModels.TripTableModel;
 import userInterface.dialogs.AddGroupToTripDialog;
 import userInterface.dialogs.AddTripDialog;
@@ -58,25 +59,30 @@ public class TripsTabPanel extends JPanel {
 
 		// Create the add trip button and set its image
 		btnAddTrip = new JButton("");
+		btnAddTrip.setToolTipText("Add a new trip");
 		btnAddTrip.setIcon(new ImageIcon(TripsTabPanel.class.getResource("/resources/add.png")));
 
 		// Create the remove trip button and set its image
 		btnRemoveTrip = new JButton("");
+		btnRemoveTrip.setToolTipText("Remove your selected trip");
 		btnRemoveTrip.setEnabled(false);
 		btnRemoveTrip.setIcon(new ImageIcon(TripsTabPanel.class.getResource("/resources/remove.png")));
 
 		// Create the add student button and set its image
 		btnAddStudent = new JButton("");
+		btnAddStudent.setToolTipText("Add students to the selected trip");
 		btnAddStudent.setEnabled(false);
 		btnAddStudent.setIcon(new ImageIcon(TripsTabPanel.class.getResource("/resources/add.png")));
 
 		// Create the remove student button and set its image
 		btnRemoveStudent = new JButton("");
+		btnRemoveStudent.setToolTipText("Remove the selected student from the selected trip");
 		btnRemoveStudent.setEnabled(false);
 		btnRemoveStudent.setIcon(new ImageIcon(TripsTabPanel.class.getResource("/resources/remove.png")));
 
 		// Create the panel to display the trip details
 		displayPanel = new JPanel();
+		displayPanel.setToolTipText("The details of the selected trip");
 		displayPanel.setBorder(null);
 
 		// Create the scrollPane for the content of the tripTable
@@ -88,35 +94,49 @@ public class TripsTabPanel extends JPanel {
 		// to the pane
 		// along with a position or alignment
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup().addComponent(btnAddTrip)
-										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnRemoveTrip))
-								.addComponent(spTrips, GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(displayPanel, GroupLayout.PREFERRED_SIZE, 307, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(spStudents, GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE).addGroup(
-										groupLayout.createSequentialGroup().addComponent(btnAddStudent)
-												.addPreferredGap(ComponentPlacement.RELATED).addComponent(
-														btnRemoveStudent)))
-						.addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-				.createSequentialGroup()
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(spTrips, GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
-										.addComponent(displayPanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-						.addGroup(groupLayout.createSequentialGroup().addGap(13).addComponent(spStudents,
-								GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)))
-				.addPreferredGap(ComponentPlacement.RELATED)
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(btnAddTrip)
-						.addComponent(btnRemoveTrip).addComponent(btnRemoveStudent).addComponent(btnAddStudent))
-				.addContainerGap()));
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(btnAddTrip)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnRemoveTrip))
+						.addComponent(spTrips, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(displayPanel, GroupLayout.PREFERRED_SIZE, 307, GroupLayout.PREFERRED_SIZE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(142)
+							.addComponent(btnAddStudent)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnRemoveStudent))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(spStudents, GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)))
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(spTrips, GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))
+						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(spStudents, GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+								.addComponent(displayPanel, GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnAddTrip)
+						.addComponent(btnRemoveTrip)
+						.addComponent(btnRemoveStudent)
+						.addComponent(btnAddStudent))
+					.addContainerGap())
+		);
 
 		// Give the display pane a y-axis box layout
 		displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.Y_AXIS));
@@ -130,6 +150,7 @@ public class TripsTabPanel extends JPanel {
 		TripTableModel tripTableModel = new TripTableModel(trips);
 		// Create the table using the table model
 		tblTrips = new JTable(tripTableModel);
+		tblTrips.setToolTipText("The avaliable trips");
 		// Add the trip table to the scroll panel
 		spTrips.setViewportView(tblTrips);
 
@@ -137,16 +158,18 @@ public class TripsTabPanel extends JPanel {
 		// Query the db to get the data to fill the rows and add it to an array
 		// list
 		Integer tripId = getTripId();
-		ArrayList<Student> students = new ArrayList<Student>();
+		ArrayList<StudentTrip> studentTrips = new ArrayList<StudentTrip>();
 
 		// If there are any trips
 		if (tripId != null) {
-			students = tripQueries.getStudentsFromTrip(tripId.intValue());
+			studentTrips = tripQueries.getStudentsFromTrip(tripId.intValue());
 		}
 		// Create the table model for trips
-		StudentTableModel studentTableModel = new StudentTableModel(students);
+		StudentTripTableModel studentTripTableModel = 
+				new StudentTripTableModel(studentTrips.toArray(new StudentTrip[studentTrips.size()]));
 		// Create the table using the table model
-		tblStudents = new JTable(studentTableModel);
+		tblStudents = new JTable(studentTripTableModel);
+		tblStudents.setToolTipText("The students attending the selected trip");
 
 		// Add the students table to the scroll panel
 		spStudents.setViewportView(tblStudents);
@@ -287,7 +310,7 @@ public class TripsTabPanel extends JPanel {
 				displayPanel.repaint();
 
 				// Update the students table
-				updateStudentTable();
+				updateStudentTripTable();
 			}
 		});
 
@@ -308,7 +331,7 @@ public class TripsTabPanel extends JPanel {
 				new TripQueries().removeStudentFromTrip(studentId);
 
 				// Update the table
-				updateStudentTable();
+				updateStudentTripTable();
 			}
 		});
 
@@ -322,7 +345,7 @@ public class TripsTabPanel extends JPanel {
 				
 				//Update the table
 				updateTripTable();
-				updateStudentTable();
+				updateStudentTripTable();
 			}
 		});
 	}
@@ -399,11 +422,12 @@ public class TripsTabPanel extends JPanel {
 	/**
 	 * Update the student table
 	 */
-	public static void updateStudentTable() {
+	public static void updateStudentTripTable() {
 		TripQueries tripQueries = new TripQueries();
 		int tripId = getTripId();
-		ArrayList<Student> students = tripQueries.getStudentsFromTrip(tripId);
-		StudentTableModel studentTableModel = new StudentTableModel(students);
+		ArrayList<StudentTrip> studentTrips = tripQueries.getStudentsFromTrip(tripId);
+		StudentTableModel studentTableModel =
+				new StudentTripTableModel(studentTrips.toArray(new StudentTrip[studentTrips.size()]));
 		tblStudents.setModel(studentTableModel);
 	}
 }

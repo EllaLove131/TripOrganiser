@@ -1,5 +1,5 @@
 /**
- * 
+ * Used to convert group result sets into group objects 
  */
 package ResultSetHandlers;
 

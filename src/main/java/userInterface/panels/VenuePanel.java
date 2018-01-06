@@ -36,6 +36,7 @@ public class VenuePanel extends JPanel {
 		
 		//Create the text field
 		txtVenue = new JTextField();
+		txtVenue.setToolTipText("Enter the venue for the trip");
 		txtVenue.setColumns(10);
 		
 		//Apply a group layout

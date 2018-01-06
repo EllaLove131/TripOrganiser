@@ -1,5 +1,5 @@
 /**
- * 
+ * Used to convert student result sets into student objects 
  */
 package ResultSetHandlers;
 

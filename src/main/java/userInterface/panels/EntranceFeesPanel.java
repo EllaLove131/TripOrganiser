@@ -38,6 +38,7 @@ public class EntranceFeesPanel extends JPanel {
 		
 		//Create the text field
 		txtEntranceFees = new JTextField();
+		txtEntranceFees.setToolTipText("Enter the trip entrance fee");
 		txtEntranceFees.setColumns(10);
 		
 		JLabel lblPound = new JLabel("£");

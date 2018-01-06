@@ -45,9 +45,11 @@ public class AllFeesPanel extends JPanel {
 
 		// Create the text fields
 		txtEntranceFees = new JTextField();
+		txtEntranceFees.setToolTipText("Enter the trip entrance fee");
 		txtEntranceFees.setColumns(10);
 
 		txtSundryFees = new JTextField();
+		txtSundryFees.setToolTipText("Enter the trip sundry fee");
 		txtSundryFees.setColumns(10);
 		
 		JLabel lblPoundSundry = new JLabel("£");

@@ -1,3 +1,6 @@
+/**
+ * Used to convert trip result sets into trip objects 
+ */
 package ResultSetHandlers;
 
 import java.sql.ResultSet;
@@ -8,6 +11,11 @@ import org.apache.commons.dbutils.ResultSetHandler;
 
 import Models.Trip;
 
+/**
+ * 
+ * @author Ella Love
+ *
+ */
 public class TripResultSetHandler implements ResultSetHandler<ArrayList<Trip>> {
 
 	public ArrayList<Trip> handle(ResultSet rs) throws SQLException {

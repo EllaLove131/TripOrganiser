@@ -1,5 +1,7 @@
 /**
- * 
+ * Dialog used for adding groups to trips in the database, creates 
+ * the dialog and its event handlers
+ * accesses the database for student and group information
  */
 package userInterface.dialogs;
 
@@ -85,6 +87,7 @@ public class AddGroupToTripDialog extends JDialog {
 			{
 				// Add the OK button to the panel
 				btnOk = new JButton("");
+				btnOk.setToolTipText("Add students to trip");
 				btnOk.setIcon(new ImageIcon(AddGroupToTripDialog.class.getResource("/resources/add.png")));
 				btnOk.setActionCommand("OK");
 				buttonPane.add(btnOk);
@@ -93,6 +96,7 @@ public class AddGroupToTripDialog extends JDialog {
 			{
 				// Add the cancel button to the panel
 				btnCancel = new JButton("");
+				btnCancel.setToolTipText("Cancel action");
 				btnCancel.setIcon(new ImageIcon(AddGroupToTripDialog.class.getResource("/resources/remove.png")));
 				btnCancel.setActionCommand("Cancel");
 				buttonPane.add(btnCancel);
@@ -135,6 +139,7 @@ public class AddGroupToTripDialog extends JDialog {
 		GroupTableModel groupTableModel = new GroupTableModel(groups);
 		// Create the table using the table model
 		tblGroups = new JTable(groupTableModel);
+		tblGroups.setToolTipText("Avaliable groups");
 		// Add the table to the scroll panel
 		spGroups.setViewportView(tblGroups);
 
@@ -152,6 +157,7 @@ public class AddGroupToTripDialog extends JDialog {
 		StudentTableModel studentTableModel = new StudentTableModel(students);
 		// Create the table using the table model
 		tblStudents = new JTable(studentTableModel);
+		tblStudents.setToolTipText("Students in the selected group");
 		// Add the Students table to the scroll panel
 		spStudents.setViewportView(tblStudents);
 
@@ -198,7 +204,7 @@ public class AddGroupToTripDialog extends JDialog {
 					new StudentQueries().addStudentToTrip(studentId, tripId);
 				}
 				// Update the student table on the trip panel
-				TripsTabPanel.updateStudentTable();
+				TripsTabPanel.updateStudentTripTable();
 				
 				// Show a dialog to the user, verifying that the action was
 				// successful

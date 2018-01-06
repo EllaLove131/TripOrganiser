@@ -1,16 +1,24 @@
+/**
+ * A student container class for storing student information.
+ */
 package Models;
 
-public class Student {
+/**
+ * 
+ * @author Ella Love
+ *
+ */
+public class Student implements IStudentProvider {
 
 	/**
 	 * Phone number regex, taken from http://regexlib.com/
 	 */
 	private final static String PHONE_NO_REGEX = "^(((\\+44\\s?\\d{4}|\\(?0\\d{4}\\)?)\\s?\\d{3}\\s?\\d{3})|((\\+44\\s?\\d{3}|\\(?0\\d{3}\\)?)\\s?\\d{3}\\s?\\d{4})|((\\+44\\s?\\d{2}|\\(?0\\d{2}\\)?)\\s?\\d{4}\\s?\\d{4}))(\\s?\\#(\\d{4}|\\d{3}))?$";
 
-	public int studentId;
-	public String firstName;
-	public String lastName;
-	public String mobileNo;
+	private int studentId;
+	private String firstName;
+	private String lastName;
+	private String mobileNo;
 
 	// getters and setters
 	public int getStudentId() {
@@ -61,5 +69,9 @@ public class Student {
 	public String toString() {
 		return "Student Id: " + studentId + ", " + "First Name: " + firstName + ", " + "Second Name: " + lastName + ", "
 				+ "Mobile No: " + mobileNo + ".";
+	}
+
+	public Student getStudent() {
+		return this;
 	}
 }

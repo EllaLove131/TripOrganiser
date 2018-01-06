@@ -1,3 +1,6 @@
+/**
+ * The main class that runs the application
+ */
 package triporganiser.triporganiser;
 
 import userInterfaces.MainContainer;

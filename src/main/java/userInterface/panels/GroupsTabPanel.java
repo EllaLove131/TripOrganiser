@@ -61,10 +61,12 @@ public class GroupsTabPanel extends JPanel {
 		
 		// Add group button, with image
 		btnAddGroup = new JButton("");
+		btnAddGroup.setToolTipText("Add a new group");
 		btnAddGroup.setIcon(new ImageIcon(GroupsTabPanel.class.getResource("/resources/add.png")));
 
 		// Remove group button, with image
 		btnRemoveGroup = new JButton("");
+		btnRemoveGroup.setToolTipText("Remove the selected group");
 		btnRemoveGroup.setEnabled(false);
 		btnRemoveGroup.setIcon(new ImageIcon(GroupsTabPanel.class.getResource("/resources/remove.png")));
 
@@ -77,6 +79,7 @@ public class GroupsTabPanel extends JPanel {
 		GroupTableModel groupTableModel = new GroupTableModel(groups);
 		// Create the table using the table model
 		tblGroups = new JTable(groupTableModel);
+		tblGroups.setToolTipText("The avaliable groups");
 
 		Integer groupId = getGroupId();
 
@@ -92,14 +95,17 @@ public class GroupsTabPanel extends JPanel {
 		StudentTableModel studentTableModel = new StudentTableModel(students);
 		// Create the table using the table model
 		tblStudents = new JTable(studentTableModel);
+		tblStudents.setToolTipText("The students in your selected group");
 
 		// Add student button, with image
 		btnAddStudent = new JButton("");
+		btnAddStudent.setToolTipText("Add a student to the selected group");
 		btnAddStudent.setEnabled(false);
 		btnAddStudent.setIcon(new ImageIcon(GroupsTabPanel.class.getResource("/resources/add.png")));
 
 		// Remove student button, with image
 		btnRemoveStudent = new JButton("");
+		btnRemoveStudent.setToolTipText("Remove the selected student");
 		btnRemoveStudent.setEnabled(false);
 		btnRemoveStudent.setIcon(new ImageIcon(GroupsTabPanel.class.getResource("/resources/remove.png")));
 

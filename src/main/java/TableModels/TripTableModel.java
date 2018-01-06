@@ -1,5 +1,5 @@
 /**
- * 
+ * Specifies the methods the trip table will use to interrogate a tabular data model
  */
 package TableModels;
 

@@ -1,5 +1,5 @@
 /**
- * 
+ * A group container class for storing student information.
  */
 package Models;
 

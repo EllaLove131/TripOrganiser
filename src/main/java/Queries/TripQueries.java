@@ -1,5 +1,5 @@
 /**
- * 
+ * A container for database queries relating to trips
  */
 package Queries;
 
@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 import org.apache.commons.dbutils.QueryRunner;
 
-import Models.Student;
+import Models.StudentTrip;
 import Models.Trip;
-import ResultSetHandlers.StudentResultSetHandler;
+import ResultSetHandlers.StudentTripResultSetHandler;
 import ResultSetHandlers.TripResultSetHandler;
 import triporganiser.triporganiser.DatabaseConnectionPoolHandler;
 
@@ -72,15 +72,15 @@ public class TripQueries {
 	 * @param tripId
 	 * @return students
 	 */
-	public ArrayList<Student> getStudentsFromTrip(int tripId) {
+	public ArrayList<StudentTrip> getStudentsFromTrip(int tripId) {
 
-		ArrayList<Student> results = new ArrayList<Student>();
+		ArrayList<StudentTrip> results = new ArrayList<StudentTrip>();
 
-		String query = "SELECT Student.studentId, firstName, lastName, mobileNo " + "FROM Student "
+		String query = "SELECT Student.studentId, firstName, lastName, mobileNo, StudentTrip.studentTripId, StudentTrip.paid, StudentTrip.authorisation " + "FROM Student "
 				+ "LEFT JOIN StudentTrip ON Student.studentId = StudentTrip.studentId " + "WHERE tripId = ?";
 
 		try {
-			results = queryRunner.query(query, new StudentResultSetHandler(), tripId);
+			results = queryRunner.query(query, new StudentTripResultSetHandler(), tripId);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -113,6 +113,30 @@ public class TripQueries {
 
 		try {
 			queryRunner.execute(query, tripId);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void setPaid(int studentTripId, Boolean value) {
+		
+		String query = "UPDATE StudentTrip SET paid = ? WHERE studentTripId = ? ";
+
+		try {
+			queryRunner.execute(query, value, studentTripId);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void setAuthorisation(int studentTripId, Boolean value) { 
+		
+		String query = "UPDATE StudentTrip SET authorisation = ? WHERE studentTripId = ? ";
+
+		try {
+			queryRunner.execute(query, value, studentTripId);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -1,5 +1,5 @@
 /**
- * 
+ * Used to convert auto generated keys from the database into integer objects 
  */
 package ResultSetHandlers;
 

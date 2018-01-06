@@ -1,5 +1,5 @@
 /**
- * 
+ * The main container for all of the panels, displays the panel
  */
 package userInterfaces;
 
@@ -48,7 +48,7 @@ public class MainContainer extends JFrame {
 		
 		//JFrame 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 949, 557);
+		setBounds(100, 100, 1147, 557);
 		
 		//Create a tabbed pane 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -76,8 +76,8 @@ public class MainContainer extends JFrame {
 		GroupsTabPanel groups = new GroupsTabPanel();
 		HelpTabPanel help = new HelpTabPanel();
 		
-		tabbedPane.addTab("Trips", null, trips, null);
-		tabbedPane.addTab("Groups", null, groups, null);
-		tabbedPane.addTab("Help", null, help, null);
+		tabbedPane.addTab("Trips", null, trips, "Trips Tab");
+		tabbedPane.addTab("Groups", null, groups, "Groups Tab");
+		tabbedPane.addTab("Help", null, help, "Tab containing help content");
 	}
 }

@@ -1,5 +1,5 @@
 /**
- * 
+ * Database connection pool handler, handles database connections 
  */
 package triporganiser.triporganiser;
 

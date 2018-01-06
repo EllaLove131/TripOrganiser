@@ -1,5 +1,5 @@
 /**
- * 
+ * Specifies the methods the student table will use to interrogate a tabular data model
  */
 package TableModels;
 
@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
+import Models.IStudentProvider;
 import Models.Student;
 
 /**
@@ -19,14 +20,20 @@ public class StudentTableModel extends AbstractTableModel {
 	public static final int FIRST_NAME_COLUMN = 0;
 	public static final int LAST_NAME_COLUMN = 1;
 	public static final int MOBILE_NO_COLUMN = 2;
-	public static final int STUDENT_ID_COLUMN = 3;
+	public static final int STUDENT_ID_COLUMN = -1;
 	
-	private ArrayList<Student> students;
-	private String[] columns;
+	protected IStudentProvider[] students;
+	protected String[] columns;
 
-	public StudentTableModel(ArrayList<Student> studentList) {
+	public StudentTableModel(IStudentProvider[] studentList) {
 		super();
 		students = studentList;
+		columns = new String[] { "First Name", "Last Name", "Mobile Number" };
+	}
+	
+	public StudentTableModel(ArrayList<Student> studentList) {
+		super();
+		students = studentList.toArray(new Student[studentList.size()]);
 		columns = new String[] { "First Name", "Last Name", "Mobile Number" };
 	}
 
@@ -37,12 +44,12 @@ public class StudentTableModel extends AbstractTableModel {
 
 	// Number of row in the table
 	public int getRowCount() {
-		return students.size();
+		return students.length;
 	}
 
 	// The object to place into a cell
 	public Object getValueAt(int row, int col) {
-		Student student = students.get(row);
+		Student student = students[row].getStudent();
 		switch (col) {
 		case FIRST_NAME_COLUMN:
 			return student.getFirstName();

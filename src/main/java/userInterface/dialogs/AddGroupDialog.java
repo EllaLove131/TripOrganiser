@@ -1,5 +1,6 @@
 /**
- * 
+ * Dialog used for adding groups to the database, creates the dialog and 
+ * its event handlers
  */
 package userInterface.dialogs;
 
@@ -71,6 +72,7 @@ public class AddGroupDialog extends JDialog {
 			{
 				// Add the OK button to the panel
 				btnOk = new JButton("");
+				btnOk.setToolTipText("Add the new group");
 				btnOk.setIcon(new ImageIcon(AddGroupDialog.class.getResource("/resources/add.png")));
 				btnOk.setActionCommand("OK");
 				buttonPane.add(btnOk);
@@ -79,6 +81,7 @@ public class AddGroupDialog extends JDialog {
 			{
 				// Add the Cancel button to the panel
 				btnCancel = new JButton("");
+				btnCancel.setToolTipText("Cancel adding a new group");
 				btnCancel.setIcon(new ImageIcon(AddGroupDialog.class.getResource("/resources/remove.png")));
 				btnCancel.setActionCommand("Cancel");
 				buttonPane.add(btnCancel);
@@ -105,19 +108,27 @@ public class AddGroupDialog extends JDialog {
 
 		// Create a name text field
 		txtName = new JTextField();
+		txtName.setToolTipText("Enter the for the new group");
 		txtName.setColumns(10);
 
 		// Set the layout for the content panel to group
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
-		gl_contentPanel.setHorizontalGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPanel.createSequentialGroup().addComponent(lblName)
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(txtName, GroupLayout.DEFAULT_SIZE,
-								312, Short.MAX_VALUE)));
-		gl_contentPanel.setVerticalGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPanel
-				.createSequentialGroup()
-				.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE).addComponent(lblName).addComponent(
-						txtName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-				.addContainerGap(196, Short.MAX_VALUE)));
+		gl_contentPanel.setHorizontalGroup(
+			gl_contentPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addComponent(lblName)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(txtName, GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_contentPanel.setVerticalGroup(
+			gl_contentPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblName)
+						.addComponent(txtName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
 		contentPanel.setLayout(gl_contentPanel);
 		getContentPane().setLayout(groupLayout);
 	}

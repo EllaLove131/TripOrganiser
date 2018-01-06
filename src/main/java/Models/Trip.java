@@ -1,5 +1,5 @@
 /**
- * 
+ * A trip container class for storing student information.
  */
 package Models;
 

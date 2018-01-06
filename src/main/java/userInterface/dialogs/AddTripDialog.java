@@ -1,5 +1,6 @@
 /**
- * 
+ * Dialog used for adding trips to the database, creates the dialog and 
+ * its event handlers
  */
 package userInterface.dialogs;
 
@@ -80,6 +81,7 @@ public class AddTripDialog extends JDialog {
 
 		// Layout
 		setBounds(100, 100, 431, 516);
+		tripTypePanel.setToolTipText("Select a trip type");
 		tripTypePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		{
 			// combo box label
@@ -92,6 +94,7 @@ public class AddTripDialog extends JDialog {
 			{
 				// Add button
 				btnAdd = new JButton("");
+				btnAdd.setToolTipText("Add new trip");
 				btnAdd.setIcon(new ImageIcon(AddTripDialog.class.getResource("/resources/add.png")));
 				btnAdd.setActionCommand("OK");
 				getRootPane().setDefaultButton(btnAdd);
@@ -99,6 +102,7 @@ public class AddTripDialog extends JDialog {
 			{
 				// cancel button
 				btnCancel = new JButton("");
+				btnCancel.setToolTipText("Cancel action");
 				btnCancel.setIcon(new ImageIcon(AddTripDialog.class.getResource("/resources/remove.png")));
 				btnCancel.setActionCommand("Cancel");
 			}

@@ -45,11 +45,14 @@ public class TripPanel extends JPanel {
 
 		// Create the text boxes
 		txtName = new JTextField();
+		txtName.setToolTipText("Enter the name of the trip");
 
 		txtStartDate = new JTextField();
+		txtStartDate.setToolTipText("Enter the start date of the trip");
 		txtStartDate.setColumns(10);
 
 		txtEndDate = new JTextField();
+		txtEndDate.setToolTipText("Enter the end date of the trip");
 		txtEndDate.setColumns(10);
 
 		// Apply a group layout

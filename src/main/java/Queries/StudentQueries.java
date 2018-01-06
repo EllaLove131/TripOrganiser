@@ -1,5 +1,5 @@
 /**
- * 
+ * A container for database queries relating to students 
  */
 package Queries;
 
@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import org.apache.commons.dbutils.QueryRunner;
 
 import Models.Student;
+import ResultSetHandlers.AutoGenKeyResultSetHandler;
 import triporganiser.triporganiser.DatabaseConnectionPoolHandler;
 
 /**
@@ -32,8 +33,8 @@ public class StudentQueries {
 		String query = "INSERT INTO Student(firstName, lastName, mobileNo) VALUES (?, ?, ?)";
 
 		try {
-			Integer studentId = queryRunner.execute(query, student.getFirstName(),
-					student.getLastName(), student.getMobileNo());
+			Integer studentId = queryRunner.insert(query, new AutoGenKeyResultSetHandler(),
+					student.getFirstName(), student.getLastName(), student.getMobileNo());
 
 			student.setStudentId(studentId.intValue());
 		} catch (SQLException e) {

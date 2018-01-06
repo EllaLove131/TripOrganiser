@@ -1,5 +1,5 @@
 /**
- * 
+ * A container for database queries relating to groups
  */
 package Queries;
 
