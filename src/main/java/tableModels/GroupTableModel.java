@@ -1,10 +1,10 @@
-package TableModels;
+package tableModels;
 
 import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-import Models.Group;
+import models.Group;
 
 /**
  * @author Ella Love

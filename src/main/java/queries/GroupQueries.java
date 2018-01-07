@@ -1,14 +1,14 @@
-package Queries;
+package queries;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.apache.commons.dbutils.QueryRunner;
 
-import Models.Group;
-import Models.Student;
-import ResultSetHandlers.GroupResultSetHandler;
-import ResultSetHandlers.StudentResultSetHandler;
+import models.Group;
+import models.Student;
+import resultSetHandlers.GroupResultSetHandler;
+import resultSetHandlers.StudentResultSetHandler;
 import triporganiser.triporganiser.DatabaseConnectionPoolHandler;
 
 /**

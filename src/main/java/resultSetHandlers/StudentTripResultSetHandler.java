@@ -1,4 +1,4 @@
-package ResultSetHandlers;
+package resultSetHandlers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,8 +7,8 @@ import java.util.Iterator;
 
 import org.apache.commons.dbutils.ResultSetHandler;
 
-import Models.Student;
-import Models.StudentTrip;
+import models.Student;
+import models.StudentTrip;
 
 /**
  * 

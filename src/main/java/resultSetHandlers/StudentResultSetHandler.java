@@ -1,4 +1,4 @@
-package ResultSetHandlers;
+package resultSetHandlers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 import org.apache.commons.dbutils.ResultSetHandler;
 
-import Models.Student;
+import models.Student;
 
 public class StudentResultSetHandler implements ResultSetHandler<ArrayList<Student>> {
 

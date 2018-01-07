@@ -18,12 +18,12 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import Models.Group;
-import Models.Student;
-import Queries.GroupQueries;
-import Queries.StudentQueries;
-import TableModels.GroupTableModel;
-import TableModels.StudentTableModel;
+import models.Group;
+import models.Student;
+import queries.GroupQueries;
+import queries.StudentQueries;
+import tableModels.GroupTableModel;
+import tableModels.StudentTableModel;
 import userInterface.dialogs.AddGroupDialog;
 import userInterface.dialogs.AddStudentDialog;
 

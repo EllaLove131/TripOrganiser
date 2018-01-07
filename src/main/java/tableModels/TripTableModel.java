@@ -1,13 +1,13 @@
 /**
  * Specifies the methods the trip table will use to interrogate a tabular data model
  */
-package TableModels;
+package tableModels;
 
 import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-import Models.Trip;
+import models.Trip;
 
 /**
  * 

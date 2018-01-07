@@ -1,4 +1,4 @@
-package LabelFormatters;
+package labelFormatters;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

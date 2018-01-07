@@ -1,7 +1,7 @@
-package TableModels;
+package tableModels;
 
-import Models.StudentTrip;
-import Queries.TripQueries;
+import models.StudentTrip;
+import queries.TripQueries;
 
 /**
  * 

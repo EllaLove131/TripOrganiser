@@ -1,11 +1,11 @@
-package Queries;
+package queries;
 
 import java.sql.SQLException;
 
 import org.apache.commons.dbutils.QueryRunner;
 
-import Models.Student;
-import ResultSetHandlers.AutoGenKeyResultSetHandler;
+import models.Student;
+import resultSetHandlers.AutoGenKeyResultSetHandler;
 import triporganiser.triporganiser.DatabaseConnectionPoolHandler;
 
 /**

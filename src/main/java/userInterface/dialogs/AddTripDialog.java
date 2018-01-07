@@ -19,8 +19,8 @@ import javax.swing.JRadioButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
-import Models.Trip;
-import Queries.TripQueries;
+import models.Trip;
+import queries.TripQueries;
 import userInterface.panels.AccommodationPanel;
 import userInterface.panels.AllFeesPanel;
 import userInterface.panels.EntranceFeesPanel;

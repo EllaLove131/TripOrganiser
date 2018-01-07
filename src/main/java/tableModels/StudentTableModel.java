@@ -1,11 +1,11 @@
-package TableModels;
+package tableModels;
 
 import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-import Models.IStudentProvider;
-import Models.Student;
+import models.IStudentProvider;
+import models.Student;
 
 /**
  * @author Ella Love

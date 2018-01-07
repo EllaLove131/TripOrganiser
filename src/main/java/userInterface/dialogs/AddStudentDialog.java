@@ -18,8 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
-import Models.Student;
-import Queries.StudentQueries;
+import models.Student;
+import queries.StudentQueries;
 import userInterface.panels.GroupsTabPanel;
 
 /**

@@ -14,7 +14,7 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
-import LabelFormatters.DateLabelFormatter;
+import labelFormatters.DateLabelFormatter;
 
 /**
  * @author Ella Love

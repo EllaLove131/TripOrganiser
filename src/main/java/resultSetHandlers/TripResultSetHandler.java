@@ -1,4 +1,4 @@
-package ResultSetHandlers;
+package resultSetHandlers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.apache.commons.dbutils.ResultSetHandler;
 
-import Models.Trip;
+import models.Trip;
 
 /**
  * 

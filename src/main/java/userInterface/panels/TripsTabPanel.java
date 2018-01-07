@@ -19,12 +19,12 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import Models.StudentTrip;
-import Models.Trip;
-import Queries.TripQueries;
-import TableModels.StudentTableModel;
-import TableModels.StudentTripTableModel;
-import TableModels.TripTableModel;
+import models.StudentTrip;
+import models.Trip;
+import queries.TripQueries;
+import tableModels.StudentTableModel;
+import tableModels.StudentTripTableModel;
+import tableModels.TripTableModel;
 import userInterface.dialogs.AddGroupToTripDialog;
 import userInterface.dialogs.AddTripDialog;
 
