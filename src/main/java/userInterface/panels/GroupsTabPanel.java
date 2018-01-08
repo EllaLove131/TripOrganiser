@@ -5,12 +5,15 @@ package userInterface.panels;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -26,8 +29,6 @@ import tableModels.GroupTableModel;
 import tableModels.StudentTableModel;
 import userInterface.dialogs.AddGroupDialog;
 import userInterface.dialogs.AddStudentDialog;
-
-import javax.swing.JLabel;
 
 /**
  * @author Ella Love
@@ -118,6 +119,7 @@ public class GroupsTabPanel extends JPanel {
 
 		// Create the scroll pane for the student table
 		JScrollPane spStudents = new JScrollPane();
+
 		// Add the student table to the scroll panel
 		spStudents.setViewportView(tblStudents);
 
@@ -212,9 +214,19 @@ public class GroupsTabPanel extends JPanel {
 			}
 		});
 
+		
 		// When a selection is made in the groups table
 		tblGroups.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
+				// update the student table
+				updateStudentTable();
+			}
+		});
+		
+		// When the groups table gains focus
+		tblGroups.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
 				// update the student table
 				updateStudentTable();
 				// set the following buttons to enabled:
@@ -222,14 +234,30 @@ public class GroupsTabPanel extends JPanel {
 				btnRemoveGroup.setEnabled(true);
 			}
 		});
+		
+		// When focus is lost from the group table
+		tblStudents.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				btnRemoveGroup.setEnabled(false);
+			}
+		});
 
-		// When a selection is made in the students table
-		tblStudents.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				// enable the remove student button if a group is selected
-				if (btnRemoveGroup.isEnabled()) {
+		// When a the student table gains focus
+		tblStudents.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				if (btnAddGroup.isEnabled()) {
 					btnRemoveStudent.setEnabled(true);
 				}
+			}
+		});
+
+		// When focus is lost from the student table
+		tblStudents.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				btnRemoveStudent.setEnabled(false);
 			}
 		});
 	}

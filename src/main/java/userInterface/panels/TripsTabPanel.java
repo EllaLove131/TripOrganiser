@@ -27,6 +27,8 @@ import tableModels.StudentTripTableModel;
 import tableModels.TripTableModel;
 import userInterface.dialogs.AddGroupToTripDialog;
 import userInterface.dialogs.AddTripDialog;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 /**
  * 
@@ -302,14 +304,6 @@ public class TripsTabPanel extends JPanel {
 			}
 		});
 
-		// When a selection is made in the trips table
-		tblStudents.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				// Set the button to enabled
-				btnRemoveStudent.setEnabled(true);
-			}
-		});
-
 		// When the remove student button is clicked
 		btnRemoveStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -334,6 +328,22 @@ public class TripsTabPanel extends JPanel {
 				// Update the table
 				updateTripTable();
 				updateStudentTripTable();
+			}
+		});
+
+		// When the students table has focus
+		tblStudents.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				btnRemoveStudent.setEnabled(true);
+			}
+		});
+
+		// When the students table looses focus
+		tblStudents.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				btnRemoveStudent.setEnabled(false);
 			}
 		});
 	}
