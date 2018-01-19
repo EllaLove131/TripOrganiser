@@ -7,7 +7,7 @@ import userInterfaces.MainContainer;
  *
  * The main class that runs the application
  */
-public class App {
+public class TripOrganiserMain {
 	public static void main(String[] args) {
 		MainContainer frame = new MainContainer();
 		frame.setVisible(true);

@@ -23,6 +23,10 @@ public class DatabaseConnectionPoolHandler {
 		dataSource.setPassword("spocktallbatterywelly123");
 	}
 
+	/** 
+	 * Get the instance of the data source
+	 * @return the data source instance
+	 */
 	public static DatabaseConnectionPoolHandler getInstance() {
 		if (instance == null) {
 			instance = new DatabaseConnectionPoolHandler();
@@ -30,6 +34,10 @@ public class DatabaseConnectionPoolHandler {
 		return instance;
 	}
 
+	/**
+	 * Gets the data source
+	 * @return the data source
+	 */
 	public DataSource getDataSource() {
 		return dataSource;
 	}

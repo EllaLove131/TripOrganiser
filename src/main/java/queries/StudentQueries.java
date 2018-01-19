@@ -81,14 +81,14 @@ public class StudentQueries {
 	 */
 	public void removeStudent(int studentId) {
 
-		String query = "DELETE FROM Student WHERE StudentId = ? ";
-		String query2 = "DELETE FROM StudentGroup WHERE StudentId = ? ";
-		String query3 = "DELETE FROM StudentTrip WHERE StudentId = ? ";
+		String queryStudent = "DELETE FROM Student WHERE StudentId = ? ";
+		String queryGroup = "DELETE FROM StudentGroup WHERE StudentId = ? ";
+		String queryTrip = "DELETE FROM StudentTrip WHERE StudentId = ? ";
 
 		try {
-			queryRunner.execute(query, studentId);
-			queryRunner.execute(query2, studentId);
-			queryRunner.execute(query3, studentId);
+			queryRunner.execute(queryStudent, studentId);
+			queryRunner.execute(queryGroup, studentId);
+			queryRunner.execute(queryTrip, studentId);
 
 		} catch (SQLException e) {
 			e.printStackTrace();

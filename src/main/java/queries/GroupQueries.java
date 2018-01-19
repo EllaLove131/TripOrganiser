@@ -46,16 +46,31 @@ public class GroupQueries {
 	 * @param groupId
 	 */
 	public void removeGroup(int groupId) {
+		
+		String queryGroup = "DELETE FROM TripOrganiser.Group WHERE GroupId = ?";
 
-		String query = "DELETE FROM TripOrganiser.Group WHERE GroupId = ?";
-
+		// Delete the group
 		try {
-			queryRunner.execute(query, groupId);
+			queryRunner.execute(queryGroup, groupId);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		//Delete the associated students
+		for (Student student : getStudentsFromGroup(groupId)) {
+			//Get the student ID's
+			int studentId = student.getStudentId();
+			
+			//Remove the students
+			new StudentQueries().removeStudent(studentId);
+		}
 	}
 
+	/**
+	 * Gets all of the groups from the db
+	 * 
+	 * @return arrayList of all groups
+	 */
 	public ArrayList<Group> getGroups() {
 
 		ArrayList<Group> results = new ArrayList<Group>();
