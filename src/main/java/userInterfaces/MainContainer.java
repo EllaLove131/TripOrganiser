@@ -6,10 +6,12 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
+import queries.HealthQueries;
 import userInterface.panels.GroupsTabPanel;
 import userInterface.panels.HelpTabPanel;
 import userInterface.panels.TripsTabPanel;
@@ -29,6 +31,14 @@ public class MainContainer extends JFrame {
 	 */
 	public MainContainer() {
 
+		// Check to see if a database connection an be made
+		if (!HealthQueries.isHealthy()) {
+			// Show a dialog informing of no database connection
+			JOptionPane.showMessageDialog(null, "There is no database connection, cannot run the application");
+			// Exit the application
+			System.exit(ERROR);
+		}
+		
 		initComponents();
 	}
 
@@ -64,7 +74,7 @@ public class MainContainer extends JFrame {
 				GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE));
 
 		contentPane.setLayout(gl_contentPane);
-
+		
 		// Create tabs within the tabbed pane
 		TripsTabPanel trips = new TripsTabPanel();
 		GroupsTabPanel groups = new GroupsTabPanel();

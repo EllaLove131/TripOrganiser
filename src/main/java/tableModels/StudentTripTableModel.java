@@ -27,6 +27,8 @@ public class StudentTripTableModel extends StudentTableModel {
 		// if the authorisation column is needed, show it
 		if (tripType.equals("DayTeacher") || tripType.equals("DayExternal")) {
 			columns = new String[] { "First Name", "Last Name", "Mobile Number", "Paid" };
+		} else if (tripType.equals("No Trip")) {
+			columns = new String[]{};
 		} else {
 			columns = new String[] { "First Name", "Last Name", "Mobile Number", "Paid", "Authorised" };
 		}

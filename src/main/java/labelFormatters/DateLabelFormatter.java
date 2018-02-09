@@ -15,14 +15,27 @@ import javax.swing.JFormattedTextField.AbstractFormatter;
 @SuppressWarnings("serial")
 public class DateLabelFormatter extends AbstractFormatter {
 
+	/** The format for the date */
 	private String datePattern = "dd-MM-yyyy";
 	private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
 
+	/**
+	 * Puts the string into a formatted date. 
+	 * 
+	 * @param date string 
+	 * @return the date formatted text
+	 */
 	@Override
 	public Object stringToValue(String text) throws ParseException {
 		return dateFormatter.parseObject(text);
 	}
 
+	/**
+	 * Puts a date value into a string format
+	 * 
+	 * @param a date value
+	 * @return the date value as a string
+	 */
 	@Override
 	public String valueToString(Object value) throws ParseException {
 		if (value != null) {
@@ -33,6 +46,11 @@ public class DateLabelFormatter extends AbstractFormatter {
 		return "";
 	}
 
+	/**
+	 * Sets the properties to format the date
+	 * 
+	 * @return the properties
+	 */
 	public static Properties setProperties() {
 		Properties p = new Properties();
 		p.put("text.today", "Today");

@@ -16,7 +16,7 @@ import triporganiser.triporganiser.DatabaseConnectionPoolHandler;
  *
  *         A container for database queries relating to trips
  */
-public class TripQueries {
+public final class TripQueries {
 
 	private QueryRunner queryRunner;
 

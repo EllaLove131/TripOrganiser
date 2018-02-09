@@ -16,7 +16,7 @@ import triporganiser.triporganiser.DatabaseConnectionPoolHandler;
  *
  *         A container for database queries relating to groups
  */
-public class GroupQueries {
+public final class GroupQueries {
 
 	private QueryRunner queryRunner;
 
@@ -36,7 +36,7 @@ public class GroupQueries {
 		try {
 			queryRunner.execute(query, group.getGroupName());
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("There is a problem with the database.");
 		}
 	}
 
@@ -53,7 +53,7 @@ public class GroupQueries {
 		try {
 			queryRunner.execute(queryGroup, groupId);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("There is a problem with the database.");
 		}
 		
 		//Delete the associated students
@@ -79,7 +79,7 @@ public class GroupQueries {
 			results = queryRunner.query("SELECT * FROM TripOrganiser.Group", new GroupResultSetHandler());
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("There is a problem with the database.");
 		}
 
 		return results;
@@ -102,7 +102,7 @@ public class GroupQueries {
 			results = queryRunner.query(query, new StudentResultSetHandler(), groupId);
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("There is a problem with the database.");
 		}
 		return results;
 	}

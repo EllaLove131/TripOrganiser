@@ -200,17 +200,41 @@ public class GroupsTabPanel extends JPanel {
 		// Remove student button clicked
 		btnRemoveStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				
 				// Get Student id from the selected row
 				int selectedRow = tblStudents.getSelectedRow();
-				int studentId = (Integer) tblStudents.getModel().getValueAt(selectedRow,
-						StudentTableModel.STUDENT_ID_COLUMN);
-
-				// Delete the student with that id
-				new StudentQueries().removeStudent(studentId);
-
-				// Update the table
-				updateStudentTable();
+				
+				if (selectedRow != -1)
+				{
+					int studentId = (Integer) tblStudents.getModel().getValueAt(selectedRow,
+							StudentTableModel.STUDENT_ID_COLUMN);
+	
+					// Delete the student with that id
+					new StudentQueries().removeStudent(studentId);
+	
+					// Update the table
+					updateStudentTable();
+					
+					// Now we need to disable the button manually because focus loss
+					// isn't triggered when an element is removed
+					btnRemoveStudent.setEnabled(false);
+				}
+			}
+		});
+		
+		// When focus is lost from the student table
+		tblStudents.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				// Get Student id from the selected row
+				int selectedRow = tblStudents.getSelectedRow();
+				
+				// This stops a race condition between the button being disabled before 
+				// it is clicked
+				if (selectedRow == -1)
+				{
+					btnRemoveStudent.setEnabled(false);
+				}
 			}
 		});
 
@@ -250,14 +274,6 @@ public class GroupsTabPanel extends JPanel {
 				if (btnAddGroup.isEnabled()) {
 					btnRemoveStudent.setEnabled(true);
 				}
-			}
-		});
-
-		// When focus is lost from the student table
-		tblStudents.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent arg0) {
-				btnRemoveStudent.setEnabled(false);
 			}
 		});
 	}

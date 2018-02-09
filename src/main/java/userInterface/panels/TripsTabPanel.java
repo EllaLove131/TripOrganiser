@@ -308,12 +308,22 @@ public class TripsTabPanel extends JPanel {
 		btnRemoveStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				int selectedRow = tblStudents.getSelectedRow();
+				
+				if (selectedRow != -1)
+				{
 				// Remove the selected student from the trip
 				int studentId = getStudentId();
+				
 				new TripQueries().removeStudentFromTrip(studentId);
 
 				// Update the table
 				updateStudentTripTable();
+				
+				// Now we need to disable the button manually because focus loss
+				// isn't triggered when an element is removed
+				btnRemoveStudent.setEnabled(false);
+				}
 			}
 		});
 
@@ -343,7 +353,15 @@ public class TripsTabPanel extends JPanel {
 		tblStudents.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				btnRemoveStudent.setEnabled(false);
+				// Get Student id from the selected row
+				int selectedRow = tblStudents.getSelectedRow();
+				
+				// This stops a race condition between the button being disabled before 
+				// it is clicked
+				if (selectedRow == -1)
+				{
+					btnRemoveStudent.setEnabled(false);
+				}
 			}
 		});
 	}
@@ -372,6 +390,10 @@ public class TripsTabPanel extends JPanel {
 			selectedRow = 0;
 		}
 		String tripType = (String) tblTrips.getModel().getValueAt(selectedRow, TripTableModel.TRIP_TYPE_COLUMN);
+		
+		if (tripType == null) {
+			tripType = "No Trip";
+		}
 
 		return tripType;
 	}

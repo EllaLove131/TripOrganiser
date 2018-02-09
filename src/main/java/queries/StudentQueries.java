@@ -13,12 +13,13 @@ import triporganiser.triporganiser.DatabaseConnectionPoolHandler;
  *
  *         A container for database queries relating to students
  */
-public class StudentQueries {
+public final class StudentQueries {
 
 	private QueryRunner queryRunner;
 
 	public StudentQueries() {
-		queryRunner = new QueryRunner(DatabaseConnectionPoolHandler.getInstance().getDataSource());
+		
+			queryRunner = new QueryRunner(DatabaseConnectionPoolHandler.getInstance().getDataSource());
 	}
 
 	/**
@@ -36,7 +37,7 @@ public class StudentQueries {
 
 			student.setStudentId(studentId.intValue());
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("There is a problem with the database.");
 		}
 	}
 
@@ -53,7 +54,7 @@ public class StudentQueries {
 		try {
 			queryRunner.execute(query, student.getStudentId(), groupId);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("There is a problem with the database.");
 		}
 	}
 
@@ -70,7 +71,7 @@ public class StudentQueries {
 		try {
 			queryRunner.execute(query, studentId, tripId);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("There is a problem with the database.");
 		}
 	}
 
@@ -91,7 +92,7 @@ public class StudentQueries {
 			queryRunner.execute(queryTrip, studentId);
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("There is a problem with the database.");
 		}
 	}
 }

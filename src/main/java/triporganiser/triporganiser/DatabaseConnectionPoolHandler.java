@@ -11,6 +11,10 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
  */
 public class DatabaseConnectionPoolHandler {
 
+	private String databaseUrl = "jdbc:mysql://programming2.clql2aelajju.us-east-2.rds.amazonaws.com/TripOrganiser";
+	private String databaseUserName = "tripOrganiser";
+	private String databasePassword = "spocktallbatterywelly123";
+	
 	private static DatabaseConnectionPoolHandler instance;
 
 	private ComboPooledDataSource dataSource;
@@ -18,10 +22,12 @@ public class DatabaseConnectionPoolHandler {
 	private DatabaseConnectionPoolHandler() {
 		dataSource = new ComboPooledDataSource();
 
-		dataSource.setJdbcUrl("jdbc:mysql://programming2.clql2aelajju.us-east-2.rds.amazonaws.com/TripOrganiser");
-		dataSource.setUser("tripOrganiser");
-		dataSource.setPassword("spocktallbatterywelly123");
-	}
+		dataSource.setJdbcUrl(databaseUrl);
+		dataSource.setUser(databaseUserName);
+		dataSource.setPassword(databasePassword);
+		
+		dataSource.setTestConnectionOnCheckout( true );
+		dataSource.setPreferredTestQuery( "SELECT 1" );	}
 
 	/** 
 	 * Get the instance of the data source
